@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en" >
+<head>
+<title>404 Error</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,user-scalable=0,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+<meta name="format-detection" content="telephone=no">
+<link rel="shortcut icon" href="favicon.ico">
+<link rel="stylesheet" href="/404/css/style.css">
+<style type="text/css">
+	.scroll{
+	position:absolute; 
+	overflow:scroll; 
+	-webkit-overflow-scrolling: touch; 
+	top:0; 
+	left:0; 
+	bottom:0; 
+	right:0;
+}
+	*{
+	-moz-user-select: none;
+	-o-user-select:none;
+	-khtml-user-select:none;
+	-webkit-user-select:none;
+	-ms-user-select:none;
+	user-select:none;
+}
+</style>
+</head>
+<body>
+<div class="scroll">
+<!-- partial:index.partial.html -->
+<!-- Thanks to @xontab -->
+<div id="page">
+		<div id="container">
+			<h1>:(</h1>
+			<h2>你的网页遇到问题，需要重定向。<br>我们不收集错误信息，只是走下流程，然后为你重定向。</h2>
+			<h2>完成<span id="percentage">0</span>%</h2>
+			<div id="details">
+				<div id="qr">
+					<div id="image">
+						<img src="/404/img/erweima.png" alt="QR Code" />
+					</div>
+				</div>
+				<div id="stopcode">
+					<h5><br>不好意思！可能页面对您造成了困恼。<br>Sorry! May page face you caused trouble, this is actually a 404 page only!</h5>
+				</div>
+			</div>
+		</div>
+	</div>
+	<br>
+</div>
+</body>
+<!-- partial -->
+<script  src="/404/js/script.js"></script>
+<script type="text/javascript">
+    //禁止下拉
+    var overscroll = function(el) {
+  el.addEventListener('touchstart', function() {
+    var top = el.scrollTop
+      , totalScroll = el.scrollHeight
+      , currentScroll = top + el.offsetHeight
+    //If we're at the top or the bottom of the containers
+    //scroll, push up or down one pixel.
+    //
+    //this prevents the scroll from "passing through" to
+    //the body.
+    if(top === 0) {
+      el.scrollTop = 1
+    } else if(currentScroll === totalScroll) {
+      el.scrollTop = top - 1
+    }
+  })
+  el.addEventListener('touchmove', function(evt) {
+    //if the content is actually scrollable, i.e. the content is long enough
+    //that scrolling can occur
+    if(el.offsetHeight < el.scrollHeight)
+      evt._isScroller = true
+  })
+}
+overscroll(document.querySelector('.scroll'));
+document.body.addEventListener('touchmove', function(evt) {
+  //In this case, the default behavior is scrolling the body, which
+  //would result in an overflow.  Since we don't want that, we preventDefault.
+  if(!evt._isScroller) {
+    evt.preventDefault()
+  }
+})
+</script>
+</html>
