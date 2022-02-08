@@ -41,6 +41,7 @@ class Handler(BaseHTTPRequestHandler):
             data = get_data(user)
             code = 200
             print("成功获取到Github日历：", user)
+            data = json.dumps(data).encode('utf-8')
         else:
             data = """<?xml version="1.0" encoding="UTF-8"?>
 <Error>
@@ -56,5 +57,5 @@ class Handler(BaseHTTPRequestHandler):
         self.send_header('Access-Control-Allow-Origin', '*')
         self.send_header('Content-type', 'application/json')
         self.end_headers()
-        self.wfile.write(json.dumps(data).encode('utf-8'))
+        self.wfile.write(data)
         return
