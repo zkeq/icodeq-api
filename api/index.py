@@ -1,7 +1,7 @@
 # -*- coding: UTF-8 -*-
 import requests
 import re
-from http.server import BaseHTTPRequestHandler, HTTPServer
+from http.server import BaseHTTPRequestHandler
 import json
 
 
@@ -51,18 +51,19 @@ class Handler(BaseHTTPRequestHandler):
         path = self.path
         try:
             user = path.split('?')[1]
-        except IndexError as e:
+        except IndexError:
             user = None
         if user:
-            data = get_data(user)
-            data = json.dumps(data).encode('utf-8')
+            _data = get_data(user)
+            data = json.dumps(_data).encode('utf-8')
             code = 200
             print("成功获取到Github日历：", user)
             data_type = 'application/json'
         else:
             code, data, data_type = error_403(path, user)
-        if not data:
-            code, data, data_type = error_403(path, user)
+        if code == 200:
+            if not _data.get('contributions'):
+                code, data, data_type = error_403(path, user)
         self.send_response(code)
         self.send_header('Access-Control-Allow-Origin', '*')
         self.send_header('Content-type', data_type)
