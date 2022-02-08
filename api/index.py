@@ -50,7 +50,8 @@ class Handler(BaseHTTPRequestHandler):
   <RequestId>{0}</RequestId>
   <HostId>{1}</HostId>
   <ApiName>{2}</ApiName>
-</Error>""".format(path, 'GitHub-Calendar', user).encode("utf-8")
+</Error>
+""".format(path, 'GitHub-Calendar', user).encode("utf-8")
             code = 403
             print("获取Github日历失败：", user)
         self.send_response(code)
