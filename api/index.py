@@ -42,6 +42,7 @@ class Handler(BaseHTTPRequestHandler):
             data = json.dumps(data).encode('utf-8')
             code = 200
             print("成功获取到Github日历：", user)
+            data_type = 'application/json'
         else:
             data = """<?xml version="1.0" encoding="UTF-8"?>
 <Error>
@@ -53,10 +54,11 @@ class Handler(BaseHTTPRequestHandler):
 </Error>
 """.format(path, 'GitHub-Calendar', user).encode("utf-8")
             code = 403
+            data_type = 'application/xml'
             print("获取Github日历失败：", user)
         self.send_response(code)
         self.send_header('Access-Control-Allow-Origin', '*')
-        self.send_header('Content-type', 'application/json')
+        self.send_header('Content-type', data_type)
         self.end_headers()
         self.wfile.write(data)
         return
