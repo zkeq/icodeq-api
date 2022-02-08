@@ -1,35 +1,40 @@
 # -*- coding: UTF-8 -*-
 import requests
 import re
-from http.server import BaseHTTPRequestHandler
+from http.server import BaseHTTPRequestHandler, HTTPServer
 import json
+
 
 def list_split(items, n):
     return [items[i:i + n] for i in range(0, len(items), n)]
-def getdata(name):
+
+
+def get_data(name):
     gitpage = requests.get("https://github.com/" + name)
     data = gitpage.text
-    datadatereg = re.compile(r'data-date="(.*?)" data-level')
-    datacountreg = re.compile(r'data-count="(.*?)" data-date')
-    datadate = datadatereg.findall(data)
-    datacount = datacountreg.findall(data)
-    datacount = list(map(int, datacount))
-    contributions = sum(datacount)
-    datalist = []
-    for index, item in enumerate(datadate):
-        itemlist = {"date": item, "count": datacount[index]}
-        datalist.append(itemlist)
-    datalistsplit = list_split(datalist, 7)
-    returndata = {
+    data_date_reg = re.compile(r'data-date="(.*?)" data-level')
+    data_count_reg = re.compile(r'data-count="(.*?)" data-date')
+    data_date = data_date_reg.findall(data)
+    data_count = data_count_reg.findall(data)
+    data_count = list(map(int, data_count))
+    contributions = sum(data_count)
+    data_list = []
+    for index, item in enumerate(data_date):
+        item_list = {"date": item, "count": data_count[index]}
+        data_list.append(item_list)
+    data_list_split = list_split(data_list, 7)
+    return_data = {
         "total": contributions,
-        "contributions": datalistsplit
+        "contributions": data_list_split
     }
-    return returndata
-class handler(BaseHTTPRequestHandler):
+    return return_data
+
+
+class Handler(BaseHTTPRequestHandler):
     def do_GET(self):
         path = self.path
         user = path.split('?')[1]
-        data = getdata(user)
+        data = get_data(user)
         self.send_response(200)
         self.send_header('Access-Control-Allow-Origin', '*')
         self.send_header('Content-type', 'application/json')
