@@ -39,10 +39,20 @@ class Handler(BaseHTTPRequestHandler):
             user = None
         if user:
             data = get_data(user)
+            code = 200
             print("成功获取到Github日历：", user)
         else:
-            data = {"error": "请输入具体的Github用户名"}
-        self.send_response(200)
+            data = """<?xml version="1.0" encoding="UTF-8"?>
+<Error>
+  <Code>AccessDenied</Code>
+  <Message>Please enter the correct parameters.</Message>
+  <RequestId>{0}</RequestId>
+  <HostId>{1}</HostId>
+  <ApiName>{2}</ApiName>
+</Error>""".format(path, 'GitHub-Calendar', user)
+            code = 403
+            print("获取Github日历失败：", user)
+        self.send_response(code)
         self.send_header('Access-Control-Allow-Origin', '*')
         self.send_header('Content-type', 'application/json')
         self.end_headers()
