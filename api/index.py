@@ -30,6 +30,22 @@ def get_data(name):
     return return_data
 
 
+def error_403(path, user):
+    data = """<?xml version="1.0" encoding="UTF-8"?>
+    <Error>
+      <Code>AccessDenied</Code>
+      <Message>Please enter the correct parameters.</Message>
+      <RequestId>{0}</RequestId>
+      <HostId>{1}</HostId>
+      <ApiName>{2}</ApiName>
+    </Error>
+    """.format(path, 'GitHub-Calendar', user).encode("utf-8")
+    code = 403
+    data_type = 'application/xml'
+    print("获取Github日历失败：", user)
+    return code, data, data_type
+
+
 class Handler(BaseHTTPRequestHandler):
     def do_GET(self):
         path = self.path
@@ -44,18 +60,9 @@ class Handler(BaseHTTPRequestHandler):
             print("成功获取到Github日历：", user)
             data_type = 'application/json'
         else:
-            data = """<?xml version="1.0" encoding="UTF-8"?>
-<Error>
-  <Code>AccessDenied</Code>
-  <Message>Please enter the correct parameters.</Message>
-  <RequestId>{0}</RequestId>
-  <HostId>{1}</HostId>
-  <ApiName>{2}</ApiName>
-</Error>
-""".format(path, 'GitHub-Calendar', user).encode("utf-8")
-            code = 403
-            data_type = 'application/xml'
-            print("获取Github日历失败：", user)
+            code, data, data_type = error_403(path, user)
+        if not data:
+            code, data, data_type = error_403(path, user)
         self.send_response(code)
         self.send_header('Access-Control-Allow-Origin', '*')
         self.send_header('Content-type', data_type)
