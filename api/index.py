@@ -39,9 +39,9 @@ class Handler(BaseHTTPRequestHandler):
             user = None
         if user:
             data = get_data(user)
+            data = json.dumps(data).encode('utf-8')
             code = 200
             print("成功获取到Github日历：", user)
-            data = json.dumps(data).encode('utf-8')
         else:
             data = """<?xml version="1.0" encoding="UTF-8"?>
 <Error>
@@ -50,8 +50,7 @@ class Handler(BaseHTTPRequestHandler):
   <RequestId>{0}</RequestId>
   <HostId>{1}</HostId>
   <ApiName>{2}</ApiName>
-</Error>""".format(path, 'GitHub-Calendar', user)
-            data = json.dumps(data)
+</Error>""".format(path, 'GitHub-Calendar', user).encode("utf-8")
             code = 403
             print("获取Github日历失败：", user)
         self.send_response(code)
