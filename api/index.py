@@ -33,8 +33,15 @@ def get_data(name):
 class Handler(BaseHTTPRequestHandler):
     def do_GET(self):
         path = self.path
-        user = path.split('?')[1]
-        data = get_data(user)
+        try:
+            user = path.split('?')[1]
+        except IndexError as e:
+            user = None
+        if user:
+            data = get_data(user)
+            print("成功获取到Github日历：", user)
+        else:
+            data = {"error": "请输入具体的Github用户名"}
         self.send_response(200)
         self.send_header('Access-Control-Allow-Origin', '*')
         self.send_header('Content-type', 'application/json')
