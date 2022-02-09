@@ -4,8 +4,7 @@ import re
 from http.server import BaseHTTPRequestHandler
 import json
 
-html_template = """
-
+html_template =
 
 
 
@@ -27,7 +26,7 @@ def getmovie(url):
 class handler(BaseHTTPRequestHandler):
     def do_GET(self):
         path = self.path
-        url = path.split('?url=')[1]
+        url = path.split('?')[1]
         data = getmovie(url)
         self.send_response(200)
         self.send_header('Access-Control-Allow-Origin', '*')
