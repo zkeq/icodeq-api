@@ -6,7 +6,7 @@ import json
 
 
 def getmovie():
-    moviepage = requests.get("http://aliyun.k8aa.com/mogai_api.php/v1.comment?rid=323854&mid=1&page=1&limit=10")
+    moviepage = requests.get("http://aliyun.k8aa.com/mogai_api.php/v1.comment?rid=323854&mid=1&page=1&limit=1")
     data = moviepage.text
     # 解析json
     data = json.loads(data)
