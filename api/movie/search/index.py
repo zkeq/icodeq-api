@@ -29,8 +29,8 @@ def index_html(url_list):
 class handler(BaseHTTPRequestHandler):
     def do_GET(self):
         path = self.path
-        url_split = path.split('?')
-        data = index_html(getmovie())
+        name = path.split('?')[1]
+        data = index_html(getmovie(name))
         self.send_response(200)
         self.send_header('Access-Control-Allow-Origin', '*')
         self.send_header('Content-type', 'text/html; charset=utf-8')
