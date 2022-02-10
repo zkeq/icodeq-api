@@ -18,7 +18,7 @@ def index_html(url_list):
 
 
 data = index_html(['41.html', '42.html', '43.html'])
-data = json.dumps(data).encode('utf-8')
+data = data.encode('utf-8')
 
 print(data)
 print(type(data))
