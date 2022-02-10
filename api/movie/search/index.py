@@ -18,7 +18,7 @@ def getmovie(name):
         # 解析json
         data = json.loads(data)
         print(data)
-        play_list = list(data['data']['vod_play_list'].values())
+        play_list = list(data['data']['vod_play_list'])
     return play_list
 
 
