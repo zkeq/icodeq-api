@@ -8,8 +8,17 @@ def getmovie(name):
     data = movie_page.text
     # 解析json
     data = json.loads(data)
+    print(data)
     # 获取视频地址
-    play_list = list(data['data']['list'][0]['data']['vod_play_list'].values())
+    try:
+        play_list = list(data['data']['list'][0]['data']['vod_play_list'].values())
+    except:
+        movie_page = requests.get("http://aliyun.k8aa.com:80/mogai_api.php/v1.vod/detail?vod_id={0}&rel_limit=10".format(name))
+        data = movie_page.text
+        # 解析json
+        data = json.loads(data)
+        print(data)
+        play_list = list(data['data']['vod_play_list'].values())
     return play_list
 
 
@@ -43,17 +52,11 @@ def index_html(url_list):
     return html
 
 
-index_html(getmovie(323854))
-
-
 class handler(BaseHTTPRequestHandler):
     def do_GET(self):
         path = self.path
         name = path.split('?')[1]
-        try:
-            data = str(index_html(getmovie(name)))
-        except:
-            data = '未找到该视频，当前接口暂不支持此类视频'
+        data = str(index_html(getmovie(name)))
         self.send_response(200)
         self.send_header('Access-Control-Allow-Origin', '*')
         self.send_header('Content-type', 'text/html; charset=utf-8')
