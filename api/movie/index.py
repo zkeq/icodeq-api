@@ -11,21 +11,32 @@ def list_split(items, n):
 
 
 def getmovie(url):
-    moviepage = requests.get("http://47.100.138.210:91/home/api?type=ys&uid=7103652&key=afhiknorswzEFIL569&url=" + url)
-    data = moviepage.text
+    movie_page = requests.get("http://aliyun.k8aa.com/mogai_api.php/v1.comment?rid=323854&mid=1&page=1&limit=10")
+    data = movie_page.text
     # 解析json
     data = json.loads(data)
     # 获取视频地址
-    url = data['url']
-    print(url)
-    return url
+    url_str = data['data']['list'][0]['data']['vod_play_list']['4']['player_info']['parse2']
+    url_list = url_str.split(',')
+    print(url_list)
+    return url_list
+
+
+def get_search(keyword):
+
+    html_data = 123
+    return html_data
 
 
 class handler(BaseHTTPRequestHandler):
     def do_GET(self):
         path = self.path
         url = path.split('?')[1]
-        data = getmovie(url)
+        search_name = path.split('?')[2]
+        if search_name:
+            data = get_search(search_name)
+        else:
+            data = getmovie(url)
         self.send_response(200)
         self.send_header('Access-Control-Allow-Origin', '*')
         self.send_header('Content-type', 'text/html; charset=utf-8')
