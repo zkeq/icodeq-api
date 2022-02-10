@@ -8,7 +8,6 @@ def getmovie(name):
     data = movie_page.text
     # 解析json
     data = json.loads(data)
-    print(data)
     # 获取视频地址
     try:
         play_list = list(data['data']['list'][0]['data']['vod_play_list'].values())
@@ -17,7 +16,6 @@ def getmovie(name):
         data = movie_page.text
         # 解析json
         data = json.loads(data)
-        print(data)
         play_list = list(data['data']['vod_play_list'])
     return play_list
 
@@ -44,6 +42,7 @@ def index_html(url_list):
         url_temp = '\n'.join(url_temp)
         url_final.append(url_temp)
     html = read_file('./api/movie/list.html')
+    print(url_final)
     for i in range(len(url_final)):
         n = i+1
         html = html.replace('{%s}' % n, name_list[i])
