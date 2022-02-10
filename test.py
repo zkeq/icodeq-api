@@ -1,3 +1,3 @@
 # coding:utf-8
 
-print("hello world{0}{0}".format("!"))
+print("12334".split('?'))

@@ -25,7 +25,7 @@ def read_file(file_name):
 
 
 def index_html(url_list):
-    html = read_file(os.getcwd() + '/movie/main.html')
+    html = read_file('./api/movie/main.html')
     html = html.replace('{0}', url_list[0])
     html = html.replace('{1}', url_list[1])
     html = html.replace('{2}', url_list[2])
