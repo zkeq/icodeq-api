@@ -47,14 +47,14 @@ def movie_search(name):
         movie_code.append(data['data']['list'][i]['vod_id'])
         movie_content.append(data['data']['list'][i]['vod_content'])
     print(movie_name)
-    return {'total': total, 'movie_name': movie_name, 'movie_code': movie_code, 'movie_content': movie_content}
+    return {'total': total, 'movie_name': movie_name, 'movie_code': movie_code, 'movie_content': movie_content}, min_num
 
 
-def get_search_html(name, dict_all):
+def get_search_html(name, dict_all, min_num):
     url_root = 'https://api.icodeq.com/api/movie/search?'
     html = read_file('./api/movie/search.html')
     html = html.replace('{0}', unquote(name, 'utf-8'))
-    for i in range(dict_all['total']):
+    for i in min_num:
         n = i + 1
         html = html.replace('{%s}' % n, dict_all['movie_name'][i])
         html = html.replace('{%s_code}' % n, url_root + str(dict_all['movie_code'][i]))
