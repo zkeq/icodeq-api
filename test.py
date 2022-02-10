@@ -20,5 +20,5 @@ def index_html(url_list):
 data = index_html(['41.html', '42.html', '43.html'])
 data = data.encode('utf-8')
 
-print(data)
-print(type(data))
+# print(data)
+# print(type(data))

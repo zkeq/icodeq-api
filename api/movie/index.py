@@ -33,9 +33,31 @@ def index_html(url_list):
     return html
 
 
-def get_search_html(name):
-    
-    return 1
+def movie_search(name):
+    movie_page = requests.get("http://aliyun.k8aa.com:80/mogai_api.php/v1.vod?page=1&limit=10&wd=" + name)
+    data = movie_page.text
+    # 解析json
+    data = json.loads(data)
+    total = data['data']['total']
+    movie_name = []
+    movie_code = []
+    movie_content = []
+    for i in range(total):
+        movie_name.append(data['data']['list'][i]['data']['vod_name'])
+        movie_code.append(data['data']['list'][i]['data']['vod_id'])
+        movie_content.append(data['data']['list'][i]['data']['vod_content'])
+    return {'total': total, 'movie_name': movie_name, 'movie_code': movie_code, 'movie_content': movie_content}
+
+
+def get_search_html(name, dict_all):
+    url_root = 'https://api.icodeq.com/api/movie/search?'
+    html = read_file('./api/movie/search.html')
+    html = html.replace('{0}', name)
+    for i in dict_all['total']:
+        html = html.replace('{%s}' % i, dict_all['movie_name'][i])
+        html = html.replace('{%s_code} % i ', url_root + dict_all['movie_code'][i])
+        html = html.replace('{%s_content} % i ', dict_all['movie_content'][i])
+    return html
 
 
 class handler(BaseHTTPRequestHandler):
@@ -45,7 +67,7 @@ class handler(BaseHTTPRequestHandler):
         if len(url_split) == 1:
             data = index_html(getmovie())
         if len(url_split) == 2:
-            data = get_search_html(url_split[1])
+            data = get_search_html(url_split[1], movie_search(url_split[1]))
         self.send_response(200)
         self.send_header('Access-Control-Allow-Origin', '*')
         self.send_header('Content-type', 'text/html; charset=utf-8')
