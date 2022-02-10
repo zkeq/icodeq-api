@@ -33,8 +33,8 @@ def index_html(url_list):
     return html
 
 
-def get_search_html(url_list):
-
+def get_search_html(name):
+    
     return 1
 
 
@@ -45,7 +45,7 @@ class handler(BaseHTTPRequestHandler):
         if len(url_split) == 1:
             data = index_html(getmovie())
         if len(url_split) == 2:
-            data = getmovie()
+            data = get_search_html(url_split[1])
         self.send_response(200)
         self.send_header('Access-Control-Allow-Origin', '*')
         self.send_header('Content-type', 'text/html; charset=utf-8')
