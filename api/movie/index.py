@@ -36,7 +36,7 @@ def movie_search(name):
     data = movie_page.text
     # 解析json
     data = json.loads(data)
-    total = data['data']['limit']
+    total = data['data']['total']
     print(total)
     movie_name = []
     movie_code = []
