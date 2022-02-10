@@ -43,7 +43,6 @@ def movie_search(name):
     movie_code = []
     movie_content = []
     for i in range(total):
-        i = str(i)
         movie_name.append(data['data']['list'][i]['vod_name'])
         movie_code.append(data['data']['list'][i]['vod_id'])
         movie_content.append(data['data']['list'][i]['vod_content'])
