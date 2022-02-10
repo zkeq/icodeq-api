@@ -52,7 +52,7 @@ def get_search_html(name, dict_all):
     url_root = 'https://api.icodeq.com/api/movie/search?'
     html = read_file('./api/movie/search.html')
     html = html.replace('{0}', unquote(name, 'utf-8'))
-    for i in range(dict_all['total']):
+    for i in range(dict_all['limit']):
         n = i + 1
         html = html.replace('{%s}' % n, dict_all['movie_name'][i])
         html = html.replace('{%s_code}' % n, url_root + str(dict_all['movie_code'][i]))
