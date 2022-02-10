@@ -21,7 +21,9 @@ def index_html(url_list):
 data = index_html(['41.html', '42.html', '43.html'])
 data = data.encode('utf-8')
 
-print(unquote('%E5%BC%80%E7%AB%AF', 'utf-8'))
+
+_dict = {'data': 'data1', 'data2': 'data2', 'data3': 'data3'}
+print(list(_dict.values()))
 
 # print(data)
 # print(type(data))
