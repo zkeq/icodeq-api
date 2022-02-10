@@ -32,7 +32,7 @@ def index_html(url_list):
             name = url.get(i).get('name')
             _url = url.get(i).get('url')
             url_temp.append(name+'<br>'+_url)
-        url_temp = '<br>'.join(url_temp)
+        url_temp = '\n'.join(url_temp)
         url_final.append(url_temp)
     html = read_file('./api/movie/list.html')
     for i in range(len(url_final)):
