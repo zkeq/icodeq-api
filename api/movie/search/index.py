@@ -11,7 +11,6 @@ def getmovie(name):
     data = json.loads(data)
     # 获取视频地址
     play_list = list(data['data']['list'][0]['data']['vod_play_list'].values())
-    print(play_list)
     return play_list
 
 
@@ -22,19 +21,24 @@ def read_file(file_name):
 
 
 def index_html(url_list):
-    # html = read_file('./api/movie/main.html')
-    play_list = url_list
-    return play_list
+    name_list = []
+    urls = []
+    for i in url_list:
+        name = i['player_info']['show']
+        name_list.append(name)
+        url = i['urls']
+        urls.append(url)
+    return name_list, urls
 
 
 class handler(BaseHTTPRequestHandler):
     def do_GET(self):
         path = self.path
         name = path.split('?')[1]
-        data = getmovie(name)
+        data = str(index_html(getmovie(name)))
         self.send_response(200)
         self.send_header('Access-Control-Allow-Origin', '*')
         self.send_header('Content-type', 'text/html; charset=utf-8')
         self.end_headers()
-        self.wfile.write('done!'.encode('utf-8'))
+        self.wfile.write(data.encode('utf-8'))
         return
