@@ -4,7 +4,6 @@ import json
 
 
 def getmovie(name):
-    print(name)
     movie_page = requests.get("http://aliyun.k8aa.com/mogai_api.php/v1.comment?rid={0}&mid=1&page=1&limit=1".format(name))
     data = movie_page.text
     # 解析json
@@ -22,13 +21,29 @@ def read_file(file_name):
 
 def index_html(url_list):
     name_list = []
+    url_final = []
     urls = []
     for i in url_list:
         name = i['player_info']['show']
         name_list.append(name)
         url = i['urls']
-        urls.append(url)
-    return name_list, urls
+        url_temp = []
+        for i in url:
+            name = url.get(i).get('name')
+            _url = url.get(i).get('url')
+            url_temp.append(name+'<br>'+_url)
+        url_temp = '<br>'.join(url_temp)
+        url_final.append(url_temp)
+    html = read_file('./api/movie/list.html')
+    for i in range(len(url_final)):
+        n = i+1
+        html = html.replace('{%s}' % n, name_list[i])
+        html = html.replace('{%s_url}' % n, url_final[i])
+    # print(urls)
+    return html
+
+
+index_html(getmovie(323854))
 
 
 class handler(BaseHTTPRequestHandler):
