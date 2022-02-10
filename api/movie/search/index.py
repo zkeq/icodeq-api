@@ -54,9 +54,6 @@ def index_html(url_list):
     return html
 
 
-index_html(getmovie(270001))
-
-
 class handler(BaseHTTPRequestHandler):
     def do_GET(self):
         path = self.path
