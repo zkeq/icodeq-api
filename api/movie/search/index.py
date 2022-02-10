@@ -35,7 +35,10 @@ class handler(BaseHTTPRequestHandler):
     def do_GET(self):
         path = self.path
         name = path.split('?')[1]
-        data = str(index_html(getmovie(name)))
+        try:
+            data = str(index_html(getmovie(name)))
+        except:
+            data = '未找到该视频，当前接口暂不支持此类视频'
         self.send_response(200)
         self.send_header('Access-Control-Allow-Origin', '*')
         self.send_header('Content-type', 'text/html; charset=utf-8')
