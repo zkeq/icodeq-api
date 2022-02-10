@@ -43,7 +43,6 @@ def movie_search(name):
     movie_code = []
     movie_content = []
     for i in range(total):
-        print(i)
         movie_name.append(data['data']['list'][i]['vod_name'])
         movie_code.append(data['data']['list'][i]['vod_id'])
         movie_content.append(data['data']['list'][i]['vod_content'])
@@ -56,9 +55,10 @@ def get_search_html(name, dict_all):
     html = read_file('./api/movie/search.html')
     html = html.replace('{0}', name)
     for i in range(dict_all['total']):
-        html = html.replace('{%s}' % i, dict_all['movie_name'][i])
-        html = html.replace('{%s_code}' % i, url_root + str(dict_all['movie_code'][i]))
-        html = html.replace('{%s_content}' % i, dict_all['movie_content'][i])
+        n = i + 1
+        html = html.replace('{%s}' % n, dict_all['movie_name'][i])
+        html = html.replace('{%s_code}' % n, url_root + str(dict_all['movie_code'][i]))
+        html = html.replace('{%s_content}' % n, dict_all['movie_content'][i])
     return html
 
 
