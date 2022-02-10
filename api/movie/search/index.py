@@ -36,19 +36,25 @@ def index_html(url_list):
         url = i['urls']
         url_temp = []
         for i in url:
-            name = url.get(i).get('name')
-            _url = url.get(i).get('url')
+            try:
+                name = url.get(i).get('name')
+                _url = url.get(i).get('url')
+            except:
+                name = i.get('name')
+                _url = i.get('url')
             url_temp.append(name+'<br>'+_url)
         url_temp = '\n'.join(url_temp)
         url_final.append(url_temp)
     html = read_file('./api/movie/list.html')
-    print(url_final)
     for i in range(len(url_final)):
         n = i+1
         html = html.replace('{%s}' % n, name_list[i])
         html = html.replace('{%s_url}' % n, url_final[i])
     # print(urls)
     return html
+
+
+index_html(getmovie(270001))
 
 
 class handler(BaseHTTPRequestHandler):
