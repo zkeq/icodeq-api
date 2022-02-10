@@ -1,10 +1,8 @@
 # -*- coding: UTF-8 -*-
 import requests
-import re
-import pickle
 from http.server import BaseHTTPRequestHandler
+from urllib.parse import unquote
 import json
-import os
 
 
 def getmovie():
@@ -53,7 +51,7 @@ def movie_search(name):
 def get_search_html(name, dict_all):
     url_root = 'https://api.icodeq.com/api/movie/search?'
     html = read_file('./api/movie/search.html')
-    html = html.replace('{0}', name)
+    html = html.replace('{0}', unquote(name, 'utf-8'))
     for i in range(dict_all['total']):
         n = i + 1
         html = html.replace('{%s}' % n, dict_all['movie_name'][i])
