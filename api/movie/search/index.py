@@ -4,8 +4,9 @@ import json
 
 
 def getmovie(name):
-    moviepage = requests.get("http://aliyun.k8aa.com/mogai_api.php/v1.comment?rid=%s&mid=1&page=1&limit=1" % name)
-    data = moviepage.text
+    print(name)
+    movie_page = requests.get("http://aliyun.k8aa.com/mogai_api.php/v1.comment?rid={0}&mid=1&page=1&limit=1".format(name))
+    data = movie_page.text
     # 解析json
     data = json.loads(data)
     # 获取视频地址
@@ -30,10 +31,10 @@ class handler(BaseHTTPRequestHandler):
     def do_GET(self):
         path = self.path
         name = path.split('?')[1]
-        data = index_html(getmovie(name))
+        data = getmovie(name)
         self.send_response(200)
         self.send_header('Access-Control-Allow-Origin', '*')
         self.send_header('Content-type', 'text/html; charset=utf-8')
         self.end_headers()
-        self.wfile.write(data.encode('utf-8'))
+        self.wfile.write('done!'.encode('utf-8'))
         return
