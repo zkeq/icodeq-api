@@ -1,5 +1,8 @@
 # coding:utf-8
 
+import json
+
+
 def read_file(file_name):
     with open(file_name, 'r', encoding='utf-8') as f:
         _html = f.read()
@@ -11,9 +14,11 @@ def index_html(url_list):
     html = html.replace('{0}', url_list[0])
     html = html.replace('{1}', url_list[1])
     html = html.replace('{2}', url_list[2])
-    return html.encode('utf-8')
+    return html
 
 
-data = index_html(['41.html', '42.html', '43.html']).decode('utf-8')
+data = index_html(['41.html', '42.html', '43.html'])
+data = json.dumps(data).encode('utf-8')
 
 print(data)
+print(type(data))
