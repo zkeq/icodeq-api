@@ -68,7 +68,7 @@ class handler(BaseHTTPRequestHandler):
         url_split = path.split('?')
         if len(url_split) == 1:
             data = index_html(getmovie())
-        if len(url_split) == 2:
+        elif len(url_split) == 2:
             data = get_search_html(url_split[1], movie_search(url_split[1]))
         self.send_response(200)
         self.send_header('Access-Control-Allow-Origin', '*')
