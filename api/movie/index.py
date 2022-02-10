@@ -37,11 +37,12 @@ def movie_search(name):
     # 解析json
     data = json.loads(data)
     total = data['data']['total']
-    print(total)
+    limit = data['data']['limit']
+    min_num = min(total, limit)
     movie_name = []
     movie_code = []
     movie_content = []
-    for i in range(total):
+    for i in range(min_num):
         movie_name.append(data['data']['list'][i]['vod_name'])
         movie_code.append(data['data']['list'][i]['vod_id'])
         movie_content.append(data['data']['list'][i]['vod_content'])
