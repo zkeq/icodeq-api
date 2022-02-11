@@ -37,7 +37,6 @@ def index_html(url_list, begin_time):
     html = html.replace('{2}', url_list[2])
     final_time = get_timestamp()
     run_time = str(final_time - begin_time)
-    print(run_time)
     html = html.replace('{time}', run_time)
     return html
 
@@ -66,7 +65,8 @@ def get_search_html(name, dict_all, begin_time):
     html = read_file('./api/movie/search.html')
     html = html.replace('{0}', unquote(name, 'utf-8'))
     final_time = get_timestamp()
-    html = html.replace('{time}', str(final_time - begin_time))
+    run_time = str(final_time - begin_time)
+    html = html.replace('{time}', run_time)
     for i in range(dict_all['min_num']):
         n = i + 1
         html = html.replace('{%s}' % n, dict_all['movie_name'][i])
