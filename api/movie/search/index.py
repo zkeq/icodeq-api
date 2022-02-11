@@ -69,7 +69,9 @@ def index_html(url_list, begin_time):
         html = html.replace('{%s_address}' % n, address_list[i])
     # print(urls)
     final_time = get_timestamp()
-    html = html.replace('{time}', str(final_time - begin_time))
+    run_time = str(final_time - begin_time)
+    print(run_time)
+    html = html.replace('{time}', run_time)
     return html
 
 
