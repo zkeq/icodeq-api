@@ -37,6 +37,7 @@ def index_html(url_list, begin_time):
     html = html.replace('{2}', url_list[2])
     final_time = get_timestamp()
     run_time = str(final_time - begin_time)
+    print(run_time)
     html = html.replace('{time}', run_time)
     return html
 
