@@ -12,7 +12,7 @@ def getmovie(name):
     try:
         play_list = list(data['data']['list'][0]['data']['vod_play_list'].values())
     except:
-        movie_page = requests.get("http://aliyun.k8aa.com:80/mogai_api.php/v1.vod/detail?vod_id={0}&rel_limit=10".format(name))
+        movie_page = requests.get("http://aliyun.k8aa.com:80/mogai_api.php/v1.vod/detail?vod_id={0}&rel_limit=1".format(name))
         data = movie_page.text
         # 解析json
         data = json.loads(data)
