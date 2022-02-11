@@ -38,6 +38,7 @@ def index_html(url_list):
             address = address.replace('..', '.')
             address_list_temp = address.split(',')
             address_list_temp.insert(0, '请将下面的地址拼接起来使用')
+            address_list_temp.insert(0, '请将下面的地址拼接起来使用')
             address_list_temp = '\n'.join(address_list_temp)
             address_list.append(address_list_temp)
         else:
@@ -60,7 +61,6 @@ def index_html(url_list):
         n = i+1
         html = html.replace('{%s}' % n, name_list[i])
         html = html.replace('{%s_url}' % n, url_final[i])
-        html = html.replace('{%s_address}' % n, address_list[i])
     # print(urls)
     return html
 
