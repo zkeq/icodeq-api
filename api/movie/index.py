@@ -12,8 +12,8 @@ def get_timestamp():
 
 
 def getmovie():
-    moviepage = requests.get("http://aliyun.k8aa.com/mogai_api.php/v1.comment?rid=323854&mid=1&page=1&limit=1")
-    data = moviepage.text
+    movie_page = requests.get("http://aliyun.k8aa.com/mogai_api.php/v1.comment?rid=323854&mid=1&page=1&limit=1")
+    data = movie_page.text
     # 解析json
     data = json.loads(data)
     # 获取视频地址
