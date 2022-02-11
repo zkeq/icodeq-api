@@ -29,9 +29,19 @@ def read_file(file_name):
 def index_html(url_list):
     name_list = []
     url_final = []
+    address_list = []
     urls = []
     for i in url_list:
         name = i['player_info']['show']
+        address = i['player_info']['parse2']
+        if address:
+            address = address.replace('..', '.')
+            address_list_temp = address.split(',')
+            address_list_temp.insert(0, '请将下面的地址拼接起来使用')
+            address_list_temp = '\n'.join(address_list_temp)
+            address_list.append(address_list_temp)
+        else:
+            address = '下面的列表就是播放地址'
         name_list.append(name)
         url = i['urls']
         url_temp = []
@@ -50,6 +60,7 @@ def index_html(url_list):
         n = i+1
         html = html.replace('{%s}' % n, name_list[i])
         html = html.replace('{%s_url}' % n, url_final[i])
+        html = html.replace('{%s_address}' % n, address_list[i])
     # print(urls)
     return html
 

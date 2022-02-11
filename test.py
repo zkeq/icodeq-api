@@ -20,11 +20,14 @@ def index_html(url_list):
 
 data = index_html(['41.html', '42.html', '43.html'])
 data = data.encode('utf-8')
-print(data)
+# print(data)
 
 
 _dict = {'data': 'data1', 'data2': 'data2', 'data3': 'data3'}
-print(list(_dict.values()))
+# print(list(_dict.values()))
 
+print('34,234,321321,321')
+
+print('\n'.join(['34', '234', '321321', '321']))
 # print(data)
 # print(type(data))
