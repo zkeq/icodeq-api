@@ -2,6 +2,7 @@
 
 import json
 from urllib.parse import unquote
+import time
 
 
 def read_file(file_name):
@@ -26,8 +27,9 @@ data = data.encode('utf-8')
 _dict = {'data': 'data1', 'data2': 'data2', 'data3': 'data3'}
 # print(list(_dict.values()))
 
-print('34,234,321321,321')
+# print('34,234,321321,321')
 
-print('\n'.join(['34', '234', '321321', '321']))
+print(time.time())
+# print('\n'.join(['34', '234', '321321', '321']))
 # print(data)
 # print(type(data))

@@ -3,6 +3,12 @@ import requests
 from http.server import BaseHTTPRequestHandler
 from urllib.parse import unquote
 import json
+import time
+
+
+# 获取时间戳
+def get_timestamp():
+    return time.time()
 
 
 def getmovie():
@@ -24,11 +30,13 @@ def read_file(file_name):
     return _html
 
 
-def index_html(url_list):
+def index_html(url_list, begin_time):
     html = read_file('./api/movie/main.html')
     html = html.replace('{0}', url_list[0])
     html = html.replace('{1}', url_list[1])
     html = html.replace('{2}', url_list[2])
+    final_time = get_timestamp()
+    html = html.replace('{time}', str(final_time - begin_time))
     return html
 
 
@@ -51,10 +59,12 @@ def movie_search(name):
     return {'total': total, 'movie_name': movie_name, 'movie_code': movie_code, 'movie_content': movie_content, 'min_num': min_num}
 
 
-def get_search_html(name, dict_all):
+def get_search_html(name, dict_all, begin_time):
     url_root = 'https://api.icodeq.com/api/movie/search?'
     html = read_file('./api/movie/search.html')
     html = html.replace('{0}', unquote(name, 'utf-8'))
+    final_time = get_timestamp()
+    html = html.replace('{time}', str(final_time - begin_time))
     for i in range(dict_all['min_num']):
         n = i + 1
         html = html.replace('{%s}' % n, dict_all['movie_name'][i])
@@ -65,12 +75,13 @@ def get_search_html(name, dict_all):
 
 class handler(BaseHTTPRequestHandler):
     def do_GET(self):
+        begin_time = get_timestamp()
         path = self.path
         url_split = path.split('?')
         if len(url_split) == 1:
-            data = index_html(getmovie())
+            data = index_html(getmovie(), begin_time)
         elif len(url_split) == 2:
-            data = get_search_html(url_split[1], movie_search(url_split[1]))
+            data = get_search_html(url_split[1], movie_search(url_split[1]), begin_time)
         self.send_response(200)
         self.send_header('Access-Control-Allow-Origin', '*')
         self.send_header('Content-type', 'text/html; charset=utf-8')

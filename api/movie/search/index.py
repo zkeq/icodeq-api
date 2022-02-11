@@ -1,6 +1,12 @@
 import requests
 from http.server import BaseHTTPRequestHandler
 import json
+import time
+
+
+# 获取时间戳
+def get_timestamp():
+    return time.time()
 
 
 def getmovie(name):
@@ -26,7 +32,7 @@ def read_file(file_name):
     return _html
 
 
-def index_html(url_list):
+def index_html(url_list, begin_time):
     name_list = []
     url_final = []
     address_list = []
@@ -62,14 +68,17 @@ def index_html(url_list):
         html = html.replace('{%s_url}' % n, url_final[i])
         html = html.replace('{%s_address}' % n, address_list[i])
     # print(urls)
+    final_time = get_timestamp()
+    html = html.replace('{time}', str(final_time - begin_time))
     return html
 
 
 class handler(BaseHTTPRequestHandler):
     def do_GET(self):
+        begin_time = get_timestamp()
         path = self.path
         name = path.split('?')[1]
-        data = str(index_html(getmovie(name)))
+        data = str(index_html(getmovie(name), begin_time))
         self.send_response(200)
         self.send_header('Access-Control-Allow-Origin', '*')
         self.send_header('Content-type', 'text/html; charset=utf-8')
