@@ -66,6 +66,7 @@ def get_search_html(name, dict_all, begin_time):
     html = html.replace('{0}', unquote(name, 'utf-8'))
     final_time = get_timestamp()
     run_time = str(final_time - begin_time)
+    print(run_time)
     html = html.replace('{time}', run_time)
     for i in range(dict_all['min_num']):
         n = i + 1
