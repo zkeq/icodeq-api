@@ -55,6 +55,7 @@ def index_html(url_list):
         url_temp = '\n'.join(url_temp)
         url_final.append(url_temp)
     html = read_file('./api/movie/list.html')
+    print(name_list)
     for i in range(len(url_final)):
         n = i+1
         html = html.replace('{%s}' % n, name_list[i])

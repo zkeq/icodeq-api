@@ -14,6 +14,7 @@ def getmovie():
     url_str = data['data']['list'][0]['data']['vod_play_list']['4']['player_info']['parse2']
     url_str = url_str.replace('..', '.')
     url_list = url_str.split(',')
+    print(url_list)
     return url_list
 
 
