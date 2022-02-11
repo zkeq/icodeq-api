@@ -36,7 +36,7 @@ def index_html(url_list):
         if address:
             address = address.replace('..', '.')
             address_list_temp = address.split(',')
-            address_list_temp.insert(0, '请将下面的地址拼接起来使用')
+            address_list_temp.insert(0, '请将下面的地址拼接起来使用\n')
             address_str = '\n'.join(address_list_temp)
         else:
             address_str = '本资源无特殊说明'
