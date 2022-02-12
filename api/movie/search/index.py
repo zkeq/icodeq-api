@@ -1,3 +1,4 @@
+from json import JSONDecodeError
 import requests
 from http.server import BaseHTTPRequestHandler
 import json
@@ -9,25 +10,38 @@ def get_timestamp():
     return time.time()
 
 
-def getmovie(name):
+def get_v1_movie(name):
     movie_page = requests.get("http://aliyun.k8aa.com/mogai_api.php/v1.comment?rid={0}&mid=1&page=1&limit=1".format(name))
     data = movie_page.text
-    # 解析json
     try:
         data = json.loads(data)
-    except:
-        time.sleep(0.3)
-        movie_page = requests.get("http://aliyun.k8aa.com/mogai_api.php/v1.comment?rid={0}&mid=1&page=1&limit=1".format(name))
-        data = movie_page.text
+    except JSONDecodeError:
+        data = None
+    return data
+
+
+def get_v2_movie(name):
+    movie_page = requests.get("http://aliyun.k8aa.com:80/mogai_api.php/v1.vod/detail?vod_id={0}&rel_limit=1".format(name))
+    data = movie_page.text
+    try:
         data = json.loads(data)
+    except JSONDecodeError:
+        data = None
+    return data
+
+
+def getmovie(name):
+    data = get_v1_movie(name)
+    while not data:
+        data = get_v1_movie(name)
     # 获取视频地址
     try:
         play_list = list(data['data']['list'][0]['data']['vod_play_list'].values())
-    except:
-        movie_page = requests.get("http://aliyun.k8aa.com:80/mogai_api.php/v1.vod/detail?vod_id={0}&rel_limit=1".format(name))
-        data = movie_page.text
-        # 解析json
-        data = json.loads(data)
+    except Exception as e:
+        print(e)
+        data = get_v2_movie(name)
+        while not data:
+            data = get_v2_movie(name)
         play_list = list(data['data']['vod_play_list'])
     return play_list
 

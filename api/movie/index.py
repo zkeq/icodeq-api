@@ -1,4 +1,6 @@
 # -*- coding: UTF-8 -*-
+from json import JSONDecodeError
+
 import requests
 from http.server import BaseHTTPRequestHandler
 from urllib.parse import unquote
@@ -11,11 +13,20 @@ def get_timestamp():
     return time.time()
 
 
-def getmovie():
+def get_movie_data():
     movie_page = requests.get("http://aliyun.k8aa.com/mogai_api.php/v1.comment?rid=323854&mid=1&page=1&limit=1")
     data = movie_page.text
-    # 解析json
-    data = json.loads(data)
+    try:
+        data = json.loads(data)
+    except JSONDecodeError:
+        data = None
+    return data
+
+
+def getmovie():
+    data = get_movie_data()
+    while not data:
+        data = get_movie_data()
     # 获取视频地址
     url_str = data['data']['list'][0]['data']['vod_play_list']['4']['player_info']['parse2']
     url_str = url_str.replace('..', '.')
@@ -42,11 +53,21 @@ def index_html(url_list, begin_time):
     return html
 
 
+def get_search_data(name):
+    _movie_page = requests.get("http://aliyun.k8aa.com:80/mogai_api.php/v1.vod?page=1&limit=10&wd=" + name)
+    _data = _movie_page.text
+    try:
+        # 解析json
+        _data = json.loads(_data)
+    except JSONDecodeError:
+        _data = None
+    return _data
+
+
 def movie_search(name):
-    movie_page = requests.get("http://aliyun.k8aa.com:80/mogai_api.php/v1.vod?page=1&limit=10&wd=" + name)
-    data = movie_page.text
-    # 解析json
-    data = json.loads(data)
+    data = get_search_data(name)
+    while not data:
+        data = get_search_data(name)
     total = data['data']['total']
     limit = data['data']['limit']
     min_num = min(total, limit)
