@@ -37,8 +37,7 @@ def getmovie(name):
     # 获取视频地址
     try:
         play_list = list(data['data']['list'][0]['data']['vod_play_list'].values())
-    except Exception as e:
-        print(e)
+    except IndexError as e:
         data = get_v2_movie(name)
         while not data:
             data = get_v2_movie(name)
