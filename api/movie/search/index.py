@@ -13,7 +13,13 @@ def getmovie(name):
     movie_page = requests.get("http://aliyun.k8aa.com/mogai_api.php/v1.comment?rid={0}&mid=1&page=1&limit=1".format(name))
     data = movie_page.text
     # 解析json
-    data = json.loads(data)
+    try:
+        data = json.loads(data)
+    except:
+        time.sleep(0.3)
+        movie_page = requests.get("http://aliyun.k8aa.com/mogai_api.php/v1.comment?rid={0}&mid=1&page=1&limit=1".format(name))
+        data = movie_page.text
+        data = json.loads(data)
     # 获取视频地址
     try:
         play_list = list(data['data']['list'][0]['data']['vod_play_list'].values())
