@@ -102,6 +102,7 @@ class handler(BaseHTTPRequestHandler):
     def do_GET(self):
         begin_time = get_timestamp()
         path = self.path
+        path = path.replace('?native.theme=1', '')
         url_split = path.split('?')
         if len(url_split) == 1:
             data = index_html(getmovie(), begin_time)
