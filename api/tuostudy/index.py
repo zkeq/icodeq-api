@@ -42,7 +42,7 @@ class handler(BaseHTTPRequestHandler):
         data = get_308(user)
         self.send_response(308)
         self.send_header('Access-Control-Allow-Origin', '*')
-        self.send_header('Content-type', 'application/json')
+        self.send_header('Content-type', 'text/html; charset=utf-8')
         self.end_headers()
         self.wfile.write(data.encode('utf-8'))
         return
