@@ -40,7 +40,7 @@ class handler(BaseHTTPRequestHandler):
         path = self.path
         user = path.split('?')[1]
         data = get_308(user)
-        self.send_response(308)
+        self.send_response(200)
         self.send_header('Access-Control-Allow-Origin', '*')
         self.send_header('Content-type', 'text/html; charset=utf-8')
         self.end_headers()
