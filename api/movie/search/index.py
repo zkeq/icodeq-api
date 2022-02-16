@@ -32,8 +32,6 @@ def get_v2_movie(name):
 
 def getmovie(name):
     data = get_v1_movie(name)
-    while not data:
-        data = get_v1_movie(name)
     # 获取视频地址
     try:
         play_list = list(data['data']['list'][0]['data']['vod_play_list'].values())
