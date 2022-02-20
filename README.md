@@ -24,11 +24,23 @@
 
 ------------
 
-### 图欧君学习资源库短链服务 `/api/tuostudy`
+### ~图欧君学习资源库短链服务 `/api/tuostudy`~
 
-🚀 原理是爬虫读我的 `oss` 上面的 `json` 文件
+🚀 ~原理是爬虫读我的 `oss` 上面的 `json` 文件~
 
-🚀 然后 `js`  `window.location.replace("/")`
+🚀 ~然后 `js`  `window.location.replace("/")`~
+
+### 短链服务已成立分支仓库
+
+🚀 https://github.com/zkeq/Tuostudy-Short-url
+
+### `Notion` `database` 做数据库 `api`
+
+🚀 仓库地址：https://github.com/zkeq/Tuostudy-Short-url/tree/main/api/notion-back-json
+
+🚀 示例地址：https://tuo.icodeq.com/api/notion-back-json
+
+
 
 ## License
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fzkeq%2Ficodeq-api.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fzkeq%2Ficodeq-api?ref=badge_large)
