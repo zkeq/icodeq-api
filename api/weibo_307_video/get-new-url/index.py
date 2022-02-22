@@ -28,5 +28,5 @@ class handler(BaseHTTPRequestHandler):
         self.send_header('Access-Control-Allow-Origin', '*')
         self.send_header('Content-type', 'application/json; charset=utf-8')
         self.end_headers()
-        self.wfile.write(data)
+        self.wfile.write(data.encode('utf-8'))
         return None
