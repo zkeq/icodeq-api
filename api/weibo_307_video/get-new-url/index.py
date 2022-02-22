@@ -18,6 +18,7 @@ def get_new_url():
       'X-Requested-With': 'XMLHttpRequest'}
     content = requests.get(url, headers=headers).json()
     w100w = content['data']['list'][2]['page_info']['media_info']['playback_list'][2]['play_info']['url']
+    w100w = w100w.replace('http://', 'https://')
     return w100w
 
 
