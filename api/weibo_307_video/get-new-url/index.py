@@ -4,6 +4,14 @@ import redis
 from http.server import BaseHTTPRequestHandler
 
 
+def get_100w_num(content):
+    page = content['data']['list']
+    for i in page:
+        if i['id'] == 4729250207239477:
+            return page.index(i)
+    return 0
+
+
 def get_new_url():
     r = redis.Redis(
       host='apn1-destined-giraffe-32369.upstash.io',
@@ -17,7 +25,8 @@ def get_new_url():
       'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36',
       'X-Requested-With': 'XMLHttpRequest'}
     content = requests.get(url, headers=headers).json()
-    w100w = content['data']['list'][2]['page_info']['media_info']['playback_list'][2]['play_info']['url']
+    fddm_100w_num = get_100w_num(content)
+    w100w = content['data']['list'][fddm_100w_num]['page_info']['media_info']['playback_list'][2]['play_info']['url']
     w100w = w100w.replace('http://', 'https://')
     return w100w
 
