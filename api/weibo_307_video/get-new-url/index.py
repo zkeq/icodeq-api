@@ -26,7 +26,7 @@ class handler(BaseHTTPRequestHandler):
         data = get_new_url()
         self.send_response(200)
         self.send_header('Access-Control-Allow-Origin', '*')
-        self.send_header('Content-type', 'html/text')
+        self.send_header('Content-type', 'text/plain')
         self.end_headers()
         self.wfile.write(data.encode('utf-8'))
         return None
