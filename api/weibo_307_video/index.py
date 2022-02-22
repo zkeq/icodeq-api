@@ -33,7 +33,7 @@ def get_video():
         url = 'https://api.icodeq.com/api/weibo_307_video/get-new-url'
         _video_url = requests.get(url).text
         r.set('video', _video_url, ex=3600)
-        return _video_url.decode('utf-8')
+        return _video_url
 
 
 class handler(BaseHTTPRequestHandler):
