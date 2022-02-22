@@ -19,7 +19,7 @@ def get_new_url():
       password='9a4bbcdc0b88484ab13ec54098ea5fb0', ssl=True)
 
     cookie = r.get('cookie')
-    url = 'https://weibo.com/ajax/profile/getWaterFallContent?uid=3908615569&cursor=0'
+    url = 'https://weibo.com/ajax/profile/getWaterFallContent?uid=3908615569&cursor=4729250207239477'
     headers = {
       'Cookie': cookie,
       'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36',
