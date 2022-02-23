@@ -74,11 +74,9 @@
 
 🚀 它会去读取 `redis` 上面的 `video` 的值，如果读不到就去给 `get-new-url` 获取请求，然后自己再去请求 `redis`
 
-🚀 而 `/api/wechat_video_public/get-new-url` 则负责传递 `video` 的值，每次访问都会传递。
+🚀 而 `/api/wechat_video_public/get-new-url` 则负责传递 `video` 的值。（支持失败推送堆糖）
 
-🚀 所以需要将 `SCF_30_min_fresh.py` 部署至云函数，设置半小时刷新一次（每半小时请求一次刷新）
-
-🚀 使用说明为修改成自己的 `redis`，修改自己的视频 ID 定位。
+🚀 使用说明为修改成自己的 `redis`。
 
 
 ## License
