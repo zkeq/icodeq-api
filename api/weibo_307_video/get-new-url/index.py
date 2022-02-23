@@ -3,7 +3,16 @@ import requests
 import redis
 from http.server import BaseHTTPRequestHandler
 from urllib.parse import quote
+import time
 import os
+
+env_dist = os.environ
+PASSWORD = env_dist.get('PASSWORD')
+
+r = redis.Redis(
+    host='apn1-destined-giraffe-32369.upstash.io',
+    port=32369,
+    password=PASSWORD, ssl=True)
 
 
 def get_100w_num(content):
@@ -23,14 +32,12 @@ def send_err(err_msg):
     requests.get(url_encode)
 
 
-def get_new_url():
-    env_dist = os.environ
-    PASSWORD = env_dist.get('PASSWORD')
-    r = redis.Redis(
-        host='apn1-destined-giraffe-32369.upstash.io',
-        port=32369,
-        password=PASSWORD, ssl=True)
+# 获取当前时间戳
+def get_time_stamp():
+    return int(time.time())
 
+
+def get_new_url():
     cookie = r.get('cookie')
     url = 'https://weibo.com/ajax/profile/getWaterFallContent?uid=3908615569&cursor=4729250207239477'
     headers = {
@@ -45,12 +52,19 @@ def get_new_url():
         send_err(e)
         return 0
     w100w = w100w.replace('http://', 'https://')
+    r.set('video', w100w, ex=3600)
     return w100w
+
+
+def get_video():
+    r.set('time', get_time_stamp(), ex=2700)
+    url = get_new_url()
+    return url
 
 
 class handler(BaseHTTPRequestHandler):
     def do_GET(self):
-        data = get_new_url()
+        data = get_video()
         self.send_response(200)
         self.send_header('Access-Control-Allow-Origin', '*')
         self.send_header('Content-type', 'text/plain')
