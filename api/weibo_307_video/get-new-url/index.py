@@ -3,6 +3,7 @@ import requests
 import redis
 from http.server import BaseHTTPRequestHandler
 from urllib.parse import quote
+import os
 
 
 def get_100w_num(content):
@@ -23,10 +24,12 @@ def send_err(err_msg):
 
 
 def get_new_url():
+    env_dist = os.environ
+    PASSWORD = env_dist.get('PASSWORD')
     r = redis.Redis(
         host='apn1-destined-giraffe-32369.upstash.io',
         port=32369,
-        password='9a4bbcdc0b88484ab13ec54098ea5fb0', ssl=True)
+        password=PASSWORD, ssl=True)
 
     cookie = r.get('cookie')
     url = 'https://weibo.com/ajax/profile/getWaterFallContent?uid=3908615569&cursor=4729250207239477'
