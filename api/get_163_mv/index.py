@@ -17,7 +17,7 @@ class Handler(BaseHTTPRequestHandler):
     def do_GET(self):
         path = self.path
         video_id = path.split('?')[1]
-        video_url = r.get('163_mv_' + video_id)
+        video_url = r.get('163_mv_' + video_id).decode('utf-8')
         self.send_response(308)
         self.send_header('Access-Control-Allow-Origin', '*')
         self.send_header('location', video_url)
