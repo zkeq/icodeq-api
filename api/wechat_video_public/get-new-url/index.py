@@ -24,11 +24,6 @@ def send_err(err_msg):
     requests.get(url_encode)
 
 
-# 获取当前时间戳
-def get_time_stamp():
-    return int(time.time())
-
-
 def get_new_url(wxv, num=0):
     cookie = r.get('cookie')
     url = f'https://mp.weixin.qq.com/mp/videoplayer?action=get_mp_video_play_url&preview=0&__biz=&mid=&idx=&vid={wxv}&uin=&key=&pass_ticket=&wxtoken=&appmsg_token=&x5=0&f=json'
@@ -47,15 +42,9 @@ def get_new_url(wxv, num=0):
     return url_content
 
 
-def get_video(wxv):
-    r.set('time', get_time_stamp(), ex=2700)
-    url = get_new_url(wxv)
-    return url
-
-
 class handler(BaseHTTPRequestHandler):
     def do_GET(self):
-        data = get_video(wxv=self.path.split('?')[1])
+        data = get_new_url(wxv=self.path.split('?')[1])
         self.send_response(200)
         self.send_header('Access-Control-Allow-Origin', '*')
         self.send_header('Content-type', 'text/plain')
