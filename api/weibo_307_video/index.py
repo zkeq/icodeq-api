@@ -5,11 +5,13 @@ import requests
 from http.server import BaseHTTPRequestHandler
 import os
 
+env_dist = os.environ
+PASSWORD = env_dist.get('PASSWORD')
 
 r = redis.Redis(
     host='apn1-destined-giraffe-32369.upstash.io',
-    port='32369',
-    password='9a4bbcdc0b88484ab13ec54098ea5fb0', ssl=True)
+    port=32369,
+    password=PASSWORD, ssl=True)
 
 
 # 获取当前时间戳
@@ -39,9 +41,6 @@ def get_video():
 
 class handler(BaseHTTPRequestHandler):
     def do_GET(self):
-        env_dist = os.environ
-        for key in env_dist:
-            print(key + ':' + env_dist[key])
         url = get_video()
         self.send_response(308)
         self.send_header('Access-Control-Allow-Origin', '*')
