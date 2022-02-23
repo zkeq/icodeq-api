@@ -3,6 +3,7 @@ import redis
 import time
 import requests
 from http.server import BaseHTTPRequestHandler
+import os
 
 
 r = redis.Redis(
@@ -38,6 +39,9 @@ def get_video():
 
 class handler(BaseHTTPRequestHandler):
     def do_GET(self):
+        env_dist = os.environ
+        for key in env_dist:
+            print(key + ':' + env_dist[key])
         url = get_video()
         self.send_response(308)
         self.send_header('Access-Control-Allow-Origin', '*')
