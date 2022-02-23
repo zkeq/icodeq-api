@@ -16,10 +16,12 @@ r = redis.Redis(
 
 
 def get_video(wxv):
-    _video_url = r.get(wxv).decode('utf-8')
+    _video_url = r.get(wxv)
     if _video_url is None:
         url = 'https://api.icodeq.com/api/wechat_video_public/get-new-url?{wxv}'.format(wxv=wxv)
         _video_url = requests.get(url).text
+    else:
+        _video_url = _video_url.decode('utf-8')
     while _video_url is None:
         _video_url = r.get(wxv).decode('utf-8')
         time.sleep(0.5)
