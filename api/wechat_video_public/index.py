@@ -22,7 +22,8 @@ def get_video(wxv):
         requests.get(url)
     while _video_url is None:
         _video_url = r.get(wxv)
-        time.sleep(0.7)
+        time.sleep(0.5)
+        print('waiting for video url')
     return _video_url.decode('utf-8')
 
 
