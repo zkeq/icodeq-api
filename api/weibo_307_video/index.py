@@ -3,12 +3,15 @@ import redis
 import time
 import requests
 from http.server import BaseHTTPRequestHandler
+import os
 
+env_dist = os.environ
+PASSWORD = env_dist.get('PASSWORD')
 
 r = redis.Redis(
     host='apn1-destined-giraffe-32369.upstash.io',
-    port='32369',
-    password='9a4bbcdc0b88484ab13ec54098ea5fb0', ssl=True)
+    port=32369,
+    password=PASSWORD, ssl=True)
 
 
 # 获取当前时间戳
