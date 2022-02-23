@@ -21,7 +21,7 @@ def get_video(wxv):
         url = 'https://api.icodeq.com/api/wechat_video_public/get-new-url?{wxv}'.format(wxv=wxv)
         requests.get(url)
     while _video_url is None:
-        video_url = r.get(wxv)
+        _video_url = r.get(wxv)
         time.sleep(0.7)
     return _video_url.decode('utf-8')
 
