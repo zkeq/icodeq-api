@@ -1,10 +1,10 @@
 # coding:utf-8
 
 from selenium import webdriver
-import os
 import redis
 from lxml import etree
 from urllib.parse import unquote
+from http.server import BaseHTTPRequestHandler
 
 chrome_options = webdriver.ChromeOptions()
 chrome_options.add_argument('--headless')
