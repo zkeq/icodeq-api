@@ -38,7 +38,7 @@ def get_new_url(wxv, num=0):
         send_err(e)
         return 0
     url_content = url_content.replace('http://', 'https://')
-    r.set(wxv, url_content, ex=3600)
+    r.set(wxv, url_content, ex=18000)
     return url_content
 
 
