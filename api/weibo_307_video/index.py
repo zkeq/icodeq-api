@@ -1,7 +1,6 @@
 # coding:utf-8
 import redis
 import time
-import requests
 from http.server import BaseHTTPRequestHandler
 import os
 
