@@ -40,10 +40,16 @@ def post_mv_2_redis(_video_id, _video_url):
     return return_url
 
 
-if __name__ == '__main__':
-    video_id = '14351340'
-    video_url = r.get('163_mv_' + video_id)
-    if not video_url:
-        video_url = get_video_url(video_id)
-        post_mv_2_redis('163_mv_' + video_id, video_url)
-    print(video_url)
+class Handler(BaseHTTPRequestHandler):
+    def do_GET(self):
+        video_id = '14351340'
+        video_url = r.get('163_mv_' + video_id)
+        if not video_url:
+            video_url = get_video_url(video_id)
+            post_mv_2_redis('163_mv_' + video_id, video_url)
+        print(video_url)
+        self.send_response(200)
+        self.send_header('Access-Control-Allow-Origin', '*')
+        self.send_header('Content-type', 'text/html; charset=utf-8')
+        self.end_headers()
+        self.wfile.write(video_url.encode('utf-8'))
