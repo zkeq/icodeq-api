@@ -35,7 +35,7 @@ def get_video_url(id):
 
 
 def post_mv_2_redis(_video_id, _video_url):
-    r.set(_video_id, _video_url)
+    r.set(_video_id, _video_url, ex=7200)
     return_url = r.get(_video_id)
     return return_url
 
