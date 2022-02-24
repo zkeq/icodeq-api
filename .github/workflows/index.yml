@@ -1,0 +1,49 @@
+name: Github 163 mv 2h
+
+# Controls when the action will run. 
+on:
+  # Triggers the workflow on push or pull request events but only for the main branch
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+  # Allows you to run this workflow manually from the Actions tab
+  workflow_dispatch:
+  schedule:
+  # 定时任务，每隔两小时执行
+    - cron: '0 2/* * * *'
+
+# A workflow run is made up of one or more jobs that can run sequentially or in parallel
+jobs:
+  # This workflow contains a single job called "build"
+  build:
+    # The type of runner that the job will run on
+    runs-on: ubuntu-latest
+
+    # Steps represent a sequence of tasks that will be executed as part of the job
+    steps:
+      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      # Runs a single command using the runners shell
+      - name: 'Set up Python'
+        uses: actions/setup-python@v1
+        with:
+           python-version: 3.7
+      - name: 'Install requirements'
+        run: pip install -r ./requirements.txt
+      - name: Install ChromeDriver
+        run: |
+          CHROME_VERSION=$(google-chrome --version | cut -f 3 -d ' ' | cut -d '.' -f 1) \
+            && CHROMEDRIVER_RELEASE=$(curl --location --fail --retry 3 http://chromedriver.storage.googleapis.com/LATEST_RELEASE_${CHROME_VERSION}) \
+            && curl --silent --show-error --location --fail --retry 3 --output /tmp/chromedriver_linux64.zip "http://chromedriver.storage.googleapis.com/$CHROMEDRIVER_RELEASE/chromedriver_linux64.zip" \
+            && cd /tmp \
+            && unzip chromedriver_linux64.zip \
+            && rm -rf chromedriver_linux64.zip \
+            && sudo mv chromedriver /usr/local/bin/chromedriver \
+            && sudo chmod +x /usr/local/bin/chromedriver \
+            && chromedriver --version
+      - name: 'Working'
+        run: |
+          python ./api/get_163_mv/Action-fresh.py
