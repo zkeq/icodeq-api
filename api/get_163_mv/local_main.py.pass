@@ -14,8 +14,6 @@ chrome_options.add_argument('--no-sandbox')
 chrome_options.add_argument('--disable-gpu')
 chrome_options.add_argument('--disable-dev-shm-usage')
 
-chromedriver = "/usr/bin/google-chrome"
-os.environ["webdriver.chrome.driver"] = chromedriver
 
 r = redis.Redis(
     host='apn1-destined-giraffe-32369.upstash.io',
@@ -24,11 +22,12 @@ r = redis.Redis(
 
 
 def get_video_url(id):
-    driver = webdriver.Chrome(chrome_options=chrome_options,executable_path=chromedriver)  # executable_path=chromedriver
+    driver = webdriver.Chrome(options=chrome_options)  # executable_path=chromedriver
     driver.get("https://music.163.com/#/mv?id={0}".format(id))
     driver.switch_to.frame("contentFrame")
     source = driver.page_source
     html = etree.HTML(source)
+    print(source)
     video_all = html.xpath('//*[@id="flash_box"]/@data-flashvars')
     try:
         video_all = video_all[0].split('&')[0].split('=')[1]
@@ -46,7 +45,7 @@ def post_mv_2_redis(_video_id, _video_url):
 
 
 if __name__ == '__main__':
-    video_id = '14351340'
+    video_id = '14401004'
     video_url = get_video_url(video_id)
-    post_mv_2_redis('163_mv_' + video_id, video_url)
+    # post_mv_2_redis('163_mv_' + video_id, video_url)
     print(video_url)

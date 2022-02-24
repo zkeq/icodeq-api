@@ -32,7 +32,10 @@ jobs:
         with:
            python-version: 3.7
       - name: 'Install requirements'
-        run: pip install -r ./requirements.txt
+        run: |
+          pip install -r ./requirements.txt
+          npm install crypto-js
+
       - name: Install ChromeDriver
         run: |
           CHROME_VERSION=$(google-chrome --version | cut -f 3 -d ' ' | cut -d '.' -f 1) \
@@ -47,3 +50,4 @@ jobs:
       - name: 'Working'
         run: |
           python ./api/get_163_mv/Action-fresh.py
+          python ./api/get_163_mv_vercel/get-new-url/main_local.py

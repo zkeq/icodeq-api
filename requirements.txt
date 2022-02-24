@@ -6,3 +6,4 @@ urllib3==1.26.5
 redis==4.1.4
 selenium==4.1.0
 lxml==4.7.1
+PyExecJS==1.5.1
