@@ -10,7 +10,6 @@ chrome_options = Options()
 chrome_options.add_argument('--headless')
 chrome_options.add_argument('--no-sandbox')
 chrome_options.add_argument('--disable-dev-shm-usage')
-browser = webdriver.Chrome('/usr/bin/chromedriver', chrome_options=chrome_options)
 
 
 r = redis.Redis(
@@ -20,6 +19,7 @@ r = redis.Redis(
 
 
 def get_video_url(id):
+    browser = webdriver.Chrome('/usr/bin/chromedriver', chrome_options=chrome_options)
     browser.get("https://music.163.com/#/mv?id={0}".format(id))
     browser.switch_to.frame("contentFrame")
     source = browser.page_source
