@@ -1,4 +1,4 @@
-name: Github 刷新 163 链接（两小时）
+name: Github 163 mv 2h
 
 # Controls when the action will run. 
 on:
@@ -11,7 +11,7 @@ on:
   workflow_dispatch:
   schedule:
   # 定时任务，每隔两小时执行
-    - cron: '0 2/* * * *'
+    - cron: '0 0,2,4,6,8,10,12,14,16,18,20,22 * * *'
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
