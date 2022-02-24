@@ -5,6 +5,10 @@ import redis
 from lxml import etree
 from urllib.parse import unquote
 from selenium.webdriver.chrome.options import Options
+import os
+
+env_dist = os.environ
+PASSWORD = env_dist.get('PASSWORD')
 
 chrome_options = Options()
 chrome_options.add_argument('--headless')
@@ -15,7 +19,7 @@ chrome_options.add_argument('--disable-dev-shm-usage')
 r = redis.Redis(
     host='apn1-destined-giraffe-32369.upstash.io',
     port=32369,
-    password="7d6531a1d3694184ab459e84b587bc53", ssl=True)
+    password=PASSWORD, ssl=True)
 
 
 def get_video_url(id):
