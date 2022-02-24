@@ -11,6 +11,9 @@ chrome_options.add_argument('--no-sandbox')
 chrome_options.add_argument('--disable-gpu')
 chrome_options.add_argument('--disable-dev-shm-usage')
 
+chromedriver = "/usr/bin/chromedriver"
+os.environ["webdriver.chrome.driver"] = chromedriver
+
 r = redis.Redis(
     host='apn1-destined-giraffe-32369.upstash.io',
     port=32369,
@@ -18,7 +21,7 @@ r = redis.Redis(
 
 
 def get_video_url(id):
-    driver = webdriver.Chrome(options=chrome_options)  # executable_path=chromedriver
+    driver = webdriver.Chrome(chrome_options=chrome_options,executable_path=chromedriver)  # executable_path=chromedriver
     driver.get("https://music.163.com/#/mv?id={0}".format(id))
     driver.switch_to.frame("contentFrame")
     source = driver.page_source
