@@ -30,7 +30,7 @@ def get_params(video_id):
     """
     获取加密参数
     """
-    with open('163.js', 'r', encoding='utf-8') as f:
+    with open('./api/get_163_mv_vercel/get-new-url/163.js', 'r', encoding='utf-8') as f:
         ctx = execjs.compile(f.read())
         params = {
             "id": video_id,
