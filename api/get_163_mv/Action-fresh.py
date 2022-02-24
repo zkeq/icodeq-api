@@ -41,9 +41,11 @@ def post_mv_2_redis(_video_id, _video_url):
 
 
 if __name__ == '__main__':
-    video_id = '14351340'
+    video_list = ['14351340', '14424820']
     # video_url = r.get('163_mv_' + video_id)
     # if not video_url:
-    video_url = get_video_url(video_id)
-    post_mv_2_redis('163_mv_' + video_id, video_url)
-    print(video_url)
+    for video_id in video_list:
+        video_url = get_video_url(video_id)
+        post_mv_2_redis('163_mv_' + video_id, video_url)
+        print(video_url)
+    print('执行完毕！')
