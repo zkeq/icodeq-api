@@ -27,7 +27,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: 'Get Date'
-        run: echo "::set-env name=REPORT_DATE::$(TZ=':Asia/Shenzhen' date '+%Y-%m-%d %T')"
+        run: echo date
 
       # Runs a single command using the runners shell
       - name: 'Set up Python'
