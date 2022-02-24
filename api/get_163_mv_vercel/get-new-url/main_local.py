@@ -4,11 +4,17 @@ import requests
 import execjs
 import json
 import redis
+import os
+
 
 """
 运行本份代码需要搭建node.js环境
 node需要安装crypto-js模块
 """
+
+env_dist = os.environ
+PASSWORD = env_dist.get('PASSWORD')
+print(PASSWORD)
 
 r = redis.Redis(
     host='apn1-destined-giraffe-32369.upstash.io',

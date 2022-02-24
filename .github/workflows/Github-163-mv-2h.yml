@@ -26,11 +26,15 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
+      - name: 'Get Date'
+        run: echo "::set-env name=REPORT_DATE::$(TZ=':Asia/Shenzhen' date '+%Y-%m-%d %T')"
+
       # Runs a single command using the runners shell
       - name: 'Set up Python'
         uses: actions/setup-python@v1
         with:
            python-version: 3.7
+
       - name: 'Install requirements'
         run: |
           pip install -r ./requirements.txt
@@ -47,7 +51,13 @@ jobs:
             && sudo mv chromedriver /usr/local/bin/chromedriver \
             && sudo chmod +x /usr/local/bin/chromedriver \
             && chromedriver --version
-      - name: 'Working'
-        run: |
-          python ./api/get_163_mv/Action-fresh.py
-          python ./api/get_163_mv_vercel/get-new-url/main_local.py
+
+      - name: 'Working 163 MV Crawler'
+        env: 
+          PASSWORD: ${{ secrets.PASSWORD }}
+        run: python ./api/get_163_mv/Action-fresh.py
+
+      - name: 'Working 163 MV JavaScript Reverse'
+        env: 
+          PASSWORD: ${{ secrets.PASSWORD }}
+        run: python ./api/get_163_mv_vercel/get-new-url/main_local.py

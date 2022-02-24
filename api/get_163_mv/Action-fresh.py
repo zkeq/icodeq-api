@@ -5,6 +5,11 @@ import redis
 from lxml import etree
 from urllib.parse import unquote
 from selenium.webdriver.chrome.options import Options
+import os
+
+env_dist = os.environ
+PASSWORD = env_dist.get('PASSWORD')
+print(PASSWORD)
 
 chrome_options = Options()
 chrome_options.add_argument('--headless')
