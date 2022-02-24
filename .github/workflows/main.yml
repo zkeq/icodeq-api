@@ -32,6 +32,6 @@ jobs:
         run: pip install -r ./requirements.txt
       - name: 'Working'
         run: |
-          sudo cp -p ./chrome/chromedriver /usr/bin/
+          sudo cp -p ./chrome/chromedriver /usr/bin/          
           chmod -R 777 /usr/bin/chromedriver
-          python ./api/get_163_mv/local_main.py
+          python ./api/get_163_mv/test.py
