@@ -3,6 +3,7 @@
 from selenium import webdriver
 import redis
 from lxml import etree
+import os
 from urllib.parse import unquote
 
 chrome_options = webdriver.ChromeOptions()
@@ -17,7 +18,7 @@ os.environ["webdriver.chrome.driver"] = chromedriver
 r = redis.Redis(
     host='apn1-destined-giraffe-32369.upstash.io',
     port=32369,
-    password='密码', ssl=True)
+    password='7d6531a1d3694184ab459e84b587bc53', ssl=True)
 
 
 def get_video_url(id):
