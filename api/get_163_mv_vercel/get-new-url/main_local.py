@@ -68,6 +68,7 @@ if __name__ == '__main__':
     for i in video_list:
         data = run(i)
         video_url = data['data']['url']
+        video_url = video_url.replace('http://', 'https://')
         post_mv_2_redis('163_mv_vercel_' + i, video_url)
         print(video_url)
     print('执行完毕！')
