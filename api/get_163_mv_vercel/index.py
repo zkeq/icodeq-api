@@ -1,9 +1,9 @@
 # coding:utf-8
-import time
+# import time
 import redis
 from http.server import BaseHTTPRequestHandler
 import os
-import requests
+# import requests
 
 env_dist = os.environ
 PASSWORD = env_dist.get('PASSWORD')
@@ -15,16 +15,16 @@ r = redis.Redis(
 
 
 def get_video(video_id):
-    _video_url = r.get('163_mv_' + video_id)
-    if _video_url is None:
-        url = 'https://api.icodeq.com/api/get_163_mv_vercel/get-new-url?{video_id}'.format(video_id=video_id)
-        _video_url = requests.get(url).text
-    else:
-        _video_url = _video_url.decode('utf-8')
-    while _video_url is None:
-        _video_url = r.get('163_mv_' + video_id).decode('utf-8')
-        time.sleep(0.5)
-        print('waiting for video url')
+    _video_url = r.get('163_mv_vercel_' + video_id)
+    # if _video_url is None:
+    #     url = 'https://api.icodeq.com/api/get_163_mv_vercel/get-new-url?{video_id}'.format(video_id=video_id)
+    #     _video_url = requests.get(url).text
+    # else:
+    _video_url = _video_url.decode('utf-8')
+    # while _video_url is None:
+    #     _video_url = r.get('163_mv_vercel_' + video_id).decode('utf-8')
+    #     time.sleep(0.5)
+    #     print('waiting for video url')
     return _video_url
 
 

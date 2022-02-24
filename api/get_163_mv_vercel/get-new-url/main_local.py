@@ -3,11 +3,17 @@
 import requests
 import execjs
 import json
+import redis
 
 """
 运行本份代码需要搭建node.js环境
 node需要安装crypto-js模块
 """
+
+r = redis.Redis(
+    host='apn1-destined-giraffe-32369.upstash.io',
+    port=32369,
+    password="7d6531a1d3694184ab459e84b587bc53", ssl=True)
 
 
 headers = {
@@ -15,14 +21,14 @@ headers = {
 }
 
 
-def get_params():
+def get_params(video_id):
     """
     获取加密参数
     """
     with open('./api/get_163_mv_vercel/get-new-url/163.js', 'r', encoding='utf-8') as f:
         ctx = execjs.compile(f.read())
         params = {
-            "id": "14401004",
+            "id": video_id,
             "r": "1080",
             "csrf_token": ""
         }
@@ -43,10 +49,25 @@ def get_data(encText, encSecKey):
     return response.json()
 
 
-if __name__ == '__main__':
-    _dict = get_params()
+def post_mv_2_redis(_video_id, _video_url):
+    r.set(_video_id, _video_url, ex=9000)
+    return_url = r.get(_video_id)
+    return return_url
+
+def run(video_id):
+    _dict = get_params(video_id)
     print(_dict)
     encText = _dict['encText']
     encSecKey = _dict['encSecKey']
     data = get_data(encText, encSecKey)
-    print(data)
+    return data
+
+
+if __name__ == '__main__':
+    video_list = ['14401004', '14424820']
+    for i in video_list:
+        data = run(i)
+        video_url = data['data']['url']
+        post_mv_2_redis('163_mv_vercel_' + i, video_url)
+        print(video_url)
+    print('执行完毕！')

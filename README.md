@@ -94,11 +94,13 @@
 
 🚀 `Github-163-mv-2h.yml` 为定时任务，2小时执行一次
 
-### 网易云 MV 直链转换 `API` (解密版)
+### 网易云 MV 直链转换 `API` (逆向版)
 
 🚀 仓库地址：https://github.com/zkeq/icodeq-api/tree/main/api/get_163_mv_vercel
 
-🚀 示例地址无，因为 `vercel` 的云函数没有 Node.js 环境，所以只能有了服务器自己搭建或者本地定时。
+🚀 示例地址：https://api.icodeq.com/api/get_163_mv_vercel?14351340
+
+🚀 后端由 Github Action 驱动！
 
 🚀 本项目由两部分组成，数据库基于 `redis`。
 
