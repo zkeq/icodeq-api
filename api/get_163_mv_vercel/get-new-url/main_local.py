@@ -64,7 +64,7 @@ def run(video_id):
 
 
 if __name__ == '__main__':
-    video_list = ['14401004', '14424820']
+    video_list = ['14401004', '14351340']
     for i in video_list:
         data = run(i)
         video_url = data['data']['url']

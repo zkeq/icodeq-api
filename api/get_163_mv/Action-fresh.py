@@ -41,7 +41,7 @@ def post_mv_2_redis(_video_id, _video_url):
 
 
 if __name__ == '__main__':
-    video_list = ['14401004', '14424820']
+    video_list = ['14401004', '14351340']
     # video_url = r.get('163_mv_' + video_id)
     # if not video_url:
     for video_id in video_list:
