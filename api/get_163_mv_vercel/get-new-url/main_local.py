@@ -14,12 +14,11 @@ node需要安装crypto-js模块
 
 env_dist = os.environ
 PASSWORD = env_dist.get('PASSWORD')
-print(PASSWORD)
 
 r = redis.Redis(
     host='apn1-destined-giraffe-32369.upstash.io',
     port=32369,
-    password="7d6531a1d3694184ab459e84b587bc53", ssl=True)
+    password=PASSWORD, ssl=True)
 
 
 headers = {
