@@ -1,4 +1,6 @@
 # coding:utf-8
+# 本文件已迁移至 Github Actions. 
+# 详情 Action-fresh.py
 
 from selenium import webdriver
 import redis

@@ -29,7 +29,7 @@ def get_video_url(id):
         video_all = video_all[0].split('&')[0].split('=')[1]
     except IndexError:
         video_all = ''
-    _video_url = unquote(video_all)
+    _video_url = unquote(video_all).replace('http://', 'https://')
     browser.quit()
     return _video_url
 
