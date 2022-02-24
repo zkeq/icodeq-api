@@ -47,3 +47,4 @@ jobs:
       - name: 'Working'
         run: |
           python ./api/get_163_mv/Action-fresh.py
+          python ./api/get_163_mv_vercel/get-new-url/main_local.py
