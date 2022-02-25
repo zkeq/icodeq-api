@@ -119,5 +119,26 @@
 > 因为 `vercel` 函数一个项目免费版只能部署 12 个函数，所以如果查看的话请去掉 `.pass` 文件...
 
 
+### 盘古解析逆向 `/api/parwix` (``BPI` )
+
+🚀 仓库地址：https://github.com/zkeq/icodeq-bpi/tree/main/api/parwix
+
+🚀 示例地址：https://bpi.icodeq.com/api/parwix
+
+🚀 后端由 Github Action 驱动！
+
+🚀 本项目由两部分组成，数据库基于 `redis`。
+
+🚀 `/api/parwix` 目录下的 `index.py` 是主要文件
+
+🚀 它会去读取 `Redis` 上面的 `视频链接` 的值
+
+🚀 而 `/api/parwix/get-new-url/main.py` 则负责传递 `真实视频地址` 的值。
+
+🚀 （依靠 `decode.js` 解密返回的请求）
+
+🚀 一小时执行一次 Action .
+
+
 ## License
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fzkeq%2Ficodeq-api.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fzkeq%2Ficodeq-api?ref=badge_large)
