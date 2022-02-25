@@ -119,7 +119,7 @@
 > 因为 `vercel` 函数一个项目免费版只能部署 12 个函数，所以如果查看的话请去掉 `.pass` 文件...
 
 
-### 盘古解析逆向 `/api/parwix` (``BPI` )
+### 盘古解析逆向 `/api/parwix` ( `BPI` )
 
 🚀 仓库地址：https://github.com/zkeq/icodeq-bpi/tree/main/api/parwix
 
