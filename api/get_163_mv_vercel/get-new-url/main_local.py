@@ -63,7 +63,7 @@ def post_mv_2_redis(_video_id, _video_url):
 def run(video_id):
     _dict = get_params(video_id)
     print("所获取到的加密参数为：", _dict)
-    print(_dict)
+    print('-' * 100)
     encText = _dict['encText']
     encSecKey = _dict['encSecKey']
     _data = get_data(encText, encSecKey)
@@ -75,8 +75,10 @@ if __name__ == '__main__':
     for i in video_list:
         data = run(i)
         print("获取到的完整数据为: ", data)
+        print('-' * 100)
         video_url = data['data']['url']
         video_url = video_url.replace('http://', 'https://')
         post_mv_2_redis('163_mv_vercel_' + i, video_url)
         print("正在获取 ID: {} 所对应链接: ".format(i), video_url)
+        print('-' * 100)
     print('执行完毕！')

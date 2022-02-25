@@ -49,12 +49,12 @@ jobs:
             && sudo chmod +x /usr/local/bin/chromedriver \
             && chromedriver --version
 
-      - name: 'Working 163 MV Crawler'
-        env: 
-          PASSWORD: ${{ secrets.PASSWORD }}
-        run: python ./api/get_163_mv/Action-fresh.py
-
-      - name: 'Working 163 MV JavaScript Reverse'
-        env: 
+      - name: 'Working 163 MV JavaScript Reverse' # 把这个放在前面 是因为后面的那个代码 可能会报错
+        env:
           PASSWORD: ${{ secrets.PASSWORD }}
         run: python ./api/get_163_mv_vercel/get-new-url/main_local.py
+
+      - name: 'Working 163 MV Crawler'
+        env:
+          PASSWORD: ${{ secrets.PASSWORD }}
+        run: python ./api/get_163_mv/Action-fresh.py

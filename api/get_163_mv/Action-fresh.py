@@ -30,6 +30,8 @@ def get_video_url(_id):
     html = etree.HTML(source)
     video_all = html.xpath('//*[@id="flash_box"]/@data-flashvars')
     print("获取到的数据为: ", video_all)
+    print('-' * 100)
+
     try:
         video_all = video_all[0].split('&')[0].split('=')[1]
     except IndexError:
@@ -52,5 +54,5 @@ if __name__ == '__main__':
     for video_id in video_list:
         video_url = get_video_url(video_id)
         print("正在获取 ID: {} 所对应链接: ".format(video_id), video_url)
+        print('-' * 100)
     print('执行完毕！')
-    print('-' * 50)
