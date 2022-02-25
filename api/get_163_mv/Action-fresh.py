@@ -42,7 +42,8 @@ def get_video_url(_id):
 
 
 def post_mv_2_redis(_video_id, _video_url):
-    r.set(_video_id, _video_url, ex=9000)
+    print('正在将获取到的视频地址放入redis中: ', end=' ')
+    print(r.set(_video_id, _video_url, ex=9000))
     return_url = r.get(_video_id)
     return return_url
 
