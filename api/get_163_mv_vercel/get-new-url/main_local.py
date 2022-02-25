@@ -46,11 +46,11 @@ def get_params(video_id):
 
 def get_data(encText, encSecKey):
     url = 'https://music.163.com/weapi/song/enhance/play/mv/url?csrf_token='
-    data = {
+    _data = {
         'params': encText,
         'encSecKey': encSecKey
     }
-    response = requests.post(url, headers=headers, data=data)
+    response = requests.post(url, headers=headers, data=_data)
     return response.json()
 
 
@@ -59,21 +59,24 @@ def post_mv_2_redis(_video_id, _video_url):
     return_url = r.get(_video_id)
     return return_url
 
+
 def run(video_id):
     _dict = get_params(video_id)
+    print("所获取到的加密参数为：", _dict)
     print(_dict)
     encText = _dict['encText']
     encSecKey = _dict['encSecKey']
-    data = get_data(encText, encSecKey)
-    return data
+    _data = get_data(encText, encSecKey)
+    return _data
 
 
 if __name__ == '__main__':
     video_list = ['14401004', '14351340']
     for i in video_list:
         data = run(i)
+        print("获取到的完整数据为: ", data)
         video_url = data['data']['url']
         video_url = video_url.replace('http://', 'https://')
         post_mv_2_redis('163_mv_vercel_' + i, video_url)
-        print(video_url)
+        print("正在获取 ID: {} 所对应链接: ".format(i), video_url)
     print('执行完毕！')

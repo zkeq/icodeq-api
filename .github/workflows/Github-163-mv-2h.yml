@@ -10,13 +10,13 @@ on:
   # Allows you to run this workflow manually from the Actions tab
   workflow_dispatch:
   schedule:
-  # 定时任务，每隔两小时执行
-    - cron: '24 0,2,4,6,8,10,12,14,16,18,20,22 * * *'
+  # 定时任务，每隔 1 小时执行
+    - cron: '36 * * * *'
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
   # This workflow contains a single job called "build"
-  build:
+  Build:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 

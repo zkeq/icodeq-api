@@ -22,13 +22,14 @@ r = redis.Redis(
     password=PASSWORD, ssl=True)
 
 
-def get_video_url(id):
+def get_video_url(_id):
     browser = webdriver.Chrome('/usr/bin/chromedriver', options=chrome_options)
-    browser.get("https://music.163.com/#/mv?id={0}".format(id))
+    browser.get("https://music.163.com/#/mv?id={0}".format(_id))
     browser.switch_to.frame("contentFrame")
     source = browser.page_source
     html = etree.HTML(source)
     video_all = html.xpath('//*[@id="flash_box"]/@data-flashvars')
+    print("获取到的数据为: ", video_all)
     try:
         video_all = video_all[0].split('&')[0].split('=')[1]
     except IndexError:
@@ -50,6 +51,6 @@ if __name__ == '__main__':
     # if not video_url:
     for video_id in video_list:
         video_url = get_video_url(video_id)
-        post_mv_2_redis('163_mv_' + video_id, video_url)
-        print(video_url)
+        print("正在获取 ID: {} 所对应链接: ".format(video_id), video_url)
     print('执行完毕！')
+    print('-' * 50)
