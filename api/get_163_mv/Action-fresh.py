@@ -55,5 +55,6 @@ if __name__ == '__main__':
     for video_id in video_list:
         video_url = get_video_url(video_id)
         print("正在获取 ID: {} 所对应链接: ".format(video_id), video_url)
+        post_mv_2_redis('163_mv_' + video_id, video_url)
         print('-' * 100)
     print('执行完毕！')
