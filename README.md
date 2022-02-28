@@ -151,5 +151,4 @@
 <a href="https://jb.gg/OpenSourceSupport">
 <img src="https://resources.jetbrains.com/storage/products/company/brand/logos/jb_beam.png" alt="JetBrains Logo (Main) logo." width="8%"/>
 <img src="https://resources.jetbrains.com/storage/products/company/brand/logos/PyCharm.png" alt="PyCharm logo." width="25%">
-<img src="https://resources.jetbrains.com/storage/products/company/brand/logos/PyCharm_icon.png" alt="PyCharm logo." width="8%"></div>
 </a>
