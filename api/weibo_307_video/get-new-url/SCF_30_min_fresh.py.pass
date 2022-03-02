@@ -4,7 +4,7 @@ import requests
 
 
 def get_video():
-    url = 'https://api.icodeq.com/api/weibo_307_video/get-new-url'
+    url = 'https://api.icodeq.com/api/weibo_307_video?uid=1239246050&cursor=4720854242429953&hd=0'
     video_url = requests.get(url).text
     return video_url
 

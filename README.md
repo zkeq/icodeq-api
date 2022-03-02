@@ -46,17 +46,27 @@
 
 🚀 仓库地址：https://github.com/zkeq/icodeq-api/tree/main/api/weibo_307_video
 
-🚀 示例地址：https://api.icodeq.com/api/weibo_307_video/
+🚀 示例地址一：https://api.icodeq.com/api/weibo_307_video?uid=1239246050&cursor=4720854242429953&hd=0
+
+🚀 参数说明：uid: 用户`id`; cursor: 视频'id'; hd: '清晰度'
+
+🚀 hd 为 0 最高, 依次往下, 具体请到视频详情页查看
+
+🚀 模板：`https://api.icodeq.com/api/weibo_307_video?uid={用户ID}&cursor={视频ID}&hd={清晰度}`
+
+🚀 示例地址二：https://api.icodeq.com/api/weibo_307_video?uid=3908615569&cursor=4696609415234742&hd=2
+
+🚀 本接口有缓存功能，第一次获取地址后，之后的 `45` 分钟速度会很快~
 
 🚀 本项目由两部分组成，并且数据库基于 `redis`
 
 🚀 `/api/weibo_307_video` 目录下的 `index.py` 是主要文件
 
-🚀 它会去读取 `redis` 上面的 `video` 的值。
+🚀 它会去读取 `redis` 上面的 `video` 的值，如果没有就去获取 `get-new-url`.
 
 🚀 而 `/api/weibo_307_video/get-new-url` 则负责传递 `video` 的值，每次访问都会传递。
 
-🚀 所以需要将 `SCF_30_min_fresh.py` 部署至云函数，设置半小时刷新一次（每半小时请求一次刷新）
+🚀 如果需要刷新缓存 将 `SCF_30_min_fresh.py` 部署至云函数，设置半小时刷新一次（每半小时请求一次刷新）
 
 🚀 使用说明为修改成自己的 `redis`，修改自己的视频 ID 定位。
 
