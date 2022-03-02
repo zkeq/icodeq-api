@@ -25,9 +25,10 @@ def get_video(cursor, url_data, hd):
     else:
         _video_url = _video_url.decode('utf-8')
     while _video_url is None:
-        _video_url = r.get('weibo_' + cursor).decode('utf-8')
         time.sleep(0.5)
+        _video_url = r.get('weibo_{}_'.format(hd) + cursor).decode('utf-8')
         print('waiting for video url')
+    print('video url:', _video_url)
     return _video_url
 
 
