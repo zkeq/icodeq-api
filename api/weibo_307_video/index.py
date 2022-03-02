@@ -2,6 +2,9 @@
 import redis
 from http.server import BaseHTTPRequestHandler
 import os
+import time
+import requests
+
 
 env_dist = os.environ
 PASSWORD = env_dist.get('PASSWORD')
@@ -12,14 +15,25 @@ r = redis.Redis(
     password=PASSWORD, ssl=True)
 
 
-def get_video():
-    _video_url = r.get('video')
-    return _video_url.decode('utf-8')
+def get_video(cursor, url_data):
+    _video_url = r.get('weibo_' + cursor)
+    if _video_url is None:
+        url = 'https://api.icodeq.com/api/weibo_307_video/get-new-url?{data}'.format(data=url_data)
+        _video_url = requests.get(url).text
+    else:
+        _video_url = _video_url.decode('utf-8')
+    while _video_url is None:
+        _video_url = r.get('weibo_' + cursor).decode('utf-8')
+        time.sleep(0.5)
+        print('waiting for video url')
+    return _video_url
 
 
 class handler(BaseHTTPRequestHandler):
     def do_GET(self):
-        url = get_video()
+        url_data = self.path.split('?')[1]
+        cursor = url_data.split('&')[1].split('=')[1]
+        url = get_video(cursor, url_data)
         self.send_response(308)
         self.send_header('Access-Control-Allow-Origin', '*')
         self.send_header('location', url)
