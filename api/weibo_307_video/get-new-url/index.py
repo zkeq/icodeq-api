@@ -29,7 +29,7 @@ def get_time_stamp():
     return int(time.time())
 
 
-def get_new_url(uid, cursor):
+def get_new_url(uid, cursor, hd):
     cookie = r.get('cookie')
     cursor += 1
     url = f'https://weibo.com/ajax/profile/getWaterFallContent?uid={uid}&cursor={cursor}'
@@ -40,12 +40,12 @@ def get_new_url(uid, cursor):
         'X-Requested-With': 'XMLHttpRequest'}
     content = requests.get(url, headers=headers).json()
     try:
-        w100w = content['data']['list'][0]['page_info']['media_info']['playback_list'][2]['play_info']['url']
+        w100w = content['data']['list'][0]['page_info']['media_info']['playback_list'][hd]['play_info']['url']
     except KeyError and IndexError as e:
         send_err(e)
         return 0
     w100w = w100w.replace('http://', 'https://')
-    r.set('video', w100w, ex=3600)
+    r.set('weibo_{}_'.format(hd) + cursor, w100w, ex=3600)
     return w100w
 
 
@@ -54,7 +54,8 @@ class handler(BaseHTTPRequestHandler):
         url_data = self.path.split('?')[1]
         uid = url_data.split('&')[0].split('=')[1]
         cursor = int(url_data.split('&')[1].split('=')[1])
-        data = get_new_url(uid, cursor)
+        hd = int(url_data.split('&')[2].split('=')[1])
+        data = get_new_url(uid, cursor, hd)
         self.send_response(200)
         self.send_header('Access-Control-Allow-Origin', '*')
         self.send_header('Content-type', 'text/plain')
