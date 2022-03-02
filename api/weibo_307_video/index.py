@@ -17,6 +17,8 @@ r = redis.Redis(
 
 def get_video(cursor, url_data, hd):
     _video_url = r.get('weibo_{}_'.format(hd) + cursor)
+    print('data:', 'weibo_{}_'.format(hd) + cursor)
+    print('_video_url:', _video_url)
     if _video_url is None:
         url = 'https://api.icodeq.com/api/weibo_307_video/get-new-url?{data}'.format(data=url_data)
         _video_url = requests.get(url).text
@@ -32,8 +34,11 @@ def get_video(cursor, url_data, hd):
 class handler(BaseHTTPRequestHandler):
     def do_GET(self):
         url_data = self.path.split('?')[1]
+        print('url_data:' + url_data)
         cursor = url_data.split('&')[0].split('=')[1]
+        print('cursor:' + cursor)
         hd = int(url_data.split('&')[1].split('=')[1])
+        print('hd:' + str(hd))
         url = get_video(cursor, url_data, hd)
         self.send_response(308)
         self.send_header('Access-Control-Allow-Origin', '*')
