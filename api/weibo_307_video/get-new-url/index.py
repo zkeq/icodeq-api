@@ -52,7 +52,7 @@ class handler(BaseHTTPRequestHandler):
     def do_GET(self):
         url_data = self.path.split('?')[1]
         uid = url_data.split('&')[0].split('=')[1]
-        cursor = url_data.split('&')[1].split('=')[1]
+        cursor = int(url_data.split('&')[1].split('=')[1])
         data = get_new_url(uid, cursor)
         self.send_response(200)
         self.send_header('Access-Control-Allow-Origin', '*')
