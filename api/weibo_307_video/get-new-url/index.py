@@ -31,8 +31,9 @@ def get_time_stamp():
 
 def get_new_url(uid, cursor):
     cookie = r.get('cookie')
-    cursor -= 1
+    cursor += 1
     url = f'https://weibo.com/ajax/profile/getWaterFallContent?uid={uid}&cursor={cursor}'.format(uid=uid, cursor=cursor)
+    print(url)
     headers = {
         'Cookie': cookie,
         'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36',
