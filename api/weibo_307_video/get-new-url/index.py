@@ -39,8 +39,10 @@ def get_new_url(uid, cursor, hd):
         'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36',
         'X-Requested-With': 'XMLHttpRequest'}
     content = requests.get(url, headers=headers).json()
+    print(content)
     try:
         w100w = content['data']['list'][0]['page_info']['media_info']['playback_list'][hd]['play_info']['url']
+        print(w100w)
     except KeyError and IndexError as e:
         send_err(e)
         return 0
