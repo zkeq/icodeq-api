@@ -54,11 +54,11 @@ class handler(BaseHTTPRequestHandler):
     def do_GET(self):
         url_data = self.path.split('?')[1]
         print('url_data:', url_data)
-        hd = int(url_data.split('&')[0].split('=')[1])
+        hd = int(url_data.split('hd=')[1].split('&')[0])
         print('hd:', hd)
-        uid = url_data.split('&')[1].split('=')[1]
+        uid = url_data.split('uid=')[1].split('&')[0]
         print('uid:', uid)
-        cursor = int(url_data.split('&')[2].split('=')[1])
+        cursor = int(url_data.split('cursor=')[1].split('&')[0])
         print('cursor:', cursor)
         data = get_new_url(uid, cursor, hd)
         self.send_response(200)
