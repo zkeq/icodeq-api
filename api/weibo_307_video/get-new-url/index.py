@@ -55,10 +55,10 @@ class handler(BaseHTTPRequestHandler):
         print('url_data:', url_data)
         cursor = int(url_data.split('&')[0].split('=')[1])
         print('cursor:', cursor)
-        uid = url_data.split('&')[1].split('=')[1]
-        print('uid:', uid)
-        hd = int(url_data.split('&')[2].split('=')[1])
+        hd = int(url_data.split('&')[1].split('=')[1])
         print('hd:', hd)
+        uid = url_data.split('&')[2].split('=')[1]
+        print('uid:', uid)
         data = get_new_url(uid, cursor, hd)
         self.send_response(200)
         self.send_header('Access-Control-Allow-Origin', '*')
