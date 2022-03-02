@@ -32,7 +32,7 @@ def get_time_stamp():
 def get_new_url(uid, cursor):
     cookie = r.get('cookie')
     cursor += 1
-    url = f'https://weibo.com/ajax/profile/getWaterFallContent?uid={uid}&cursor={cursor}'.format(uid=uid, cursor=cursor)
+    url = f'https://weibo.com/ajax/profile/getWaterFallContent?uid={uid}&cursor={cursor}'
     print(url)
     headers = {
         'Cookie': cookie,
