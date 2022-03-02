@@ -32,8 +32,8 @@ def get_video(cursor, url_data, hd):
 class handler(BaseHTTPRequestHandler):
     def do_GET(self):
         url_data = self.path.split('?')[1]
-        cursor = url_data.split('&')[1].split('=')[1]
-        hd = int(url_data.split('&')[2].split('=')[1])
+        cursor = url_data.split('&')[0].split('=')[1]
+        hd = int(url_data.split('&')[1].split('=')[1])
         url = get_video(cursor, url_data, hd)
         self.send_response(308)
         self.send_header('Access-Control-Allow-Origin', '*')
