@@ -72,7 +72,7 @@ def run(video_id):
 
 
 if __name__ == '__main__':
-    video_list = ['14401004', '14351340']
+    video_list = ['14401004', '14351340', '14300943']
     for i in video_list:
         data = run(i)
         print("获取到的完整数据为: ", data)
