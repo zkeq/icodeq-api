@@ -45,7 +45,7 @@ def get_new_url(uid, cursor, hd):
         send_err(e)
         return 0
     w100w = w100w.replace('http://', 'https://')
-    r.set('weibo_{}_'.format(str(hd)) + cursor, w100w, ex=3600)
+    r.set('weibo_{}_'.format(str(hd)) + str(cursor), w100w, ex=3600)
     return w100w
 
 
