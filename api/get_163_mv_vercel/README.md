@@ -19,3 +19,16 @@
 🚀 网易云的有效期为 2 小时左右，故两小时执行一次 Action .
 
 > 请将 `.PASS` 后缀去掉后查看！
+
+### 163mv_fast_API.zip
+
+```cmd
+https:///163mv.icodeq.com/docs
+```
+
+1. 部署至服务器即可使用
+2. 端口号和 `Redis` 地址 自己改
+3. 使用说明为
+4. https://163mv.icodeq.com/?vid={vid}
+5. 详情见  [归档 | 全自动解析 微博/微信 视频 | ZkeqのCoding日志 (icodeq.com)](https://icodeq.com/2022/03e4ec0968c8/)
+
