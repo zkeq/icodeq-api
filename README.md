@@ -1,6 +1,7 @@
 ## 自用API地址
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fzkeq%2Ficodeq-api.svg?type=small)](https://app.fossa.com/projects/git%2Bgithub.com%2Fzkeq%2Ficodeq-api?ref=badge_small)
 
+> 部分 `API` 说明参考博文: https://icodeq.com/2022/03e4ec0968c8/
 
 ### 视频解析 `/api/movie`
 
@@ -105,6 +106,8 @@
 🚀 `Github-163-mv-2h.yml` 为定时任务，2小时执行一次
 
 ### 网易云 MV 直链转换 `API` (逆向版)
+
+> 服务器部署全自动版参见博文: https://icodeq.com/2022/03e4ec0968c8/
 
 🚀 仓库地址：https://github.com/zkeq/icodeq-api/tree/main/api/get_163_mv_vercel
 

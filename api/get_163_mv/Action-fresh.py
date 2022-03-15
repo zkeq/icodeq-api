@@ -43,7 +43,7 @@ def get_video_url(_id):
 
 def post_mv_2_redis(_video_id, _video_url):
     print('正在将获取到的视频地址放入 Redis 中: ', end=' ')
-    print(r.set(_video_id, _video_url, ex=9000))
+    print(r.set(_video_id, _video_url, ex=6000))
     return_url = r.get(_video_id)
     return return_url
 
