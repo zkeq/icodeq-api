@@ -108,6 +108,8 @@
 ### 网易云 MV 直链转换 `API` (逆向版)
 
 > 服务器部署全自动版参见博文: [https://icodeq.com/2022/03e4ec0968c8/](https://icodeq.com/2022/03e4ec0968c8/#%E7%BD%91%E6%98%93MV%EF%BC%88%E5%85%A8%E8%87%AA%E5%8A%A8%E9%80%86%E5%90%91%E7%BC%93%E5%AD%98%E7%89%88%EF%BC%89-%E6%96%B0%E5%A2%9E)
+> 
+> 服务器自动部署版的文件：[/api/get_163_mv_vercel#163mv_fast_api.zip](https://github.com/zkeq/icodeq-api/tree/main/api/get_163_mv_vercel#163mv_fast_apizip)
 
 🚀 仓库地址：https://github.com/zkeq/icodeq-api/tree/main/api/get_163_mv_vercel
 
