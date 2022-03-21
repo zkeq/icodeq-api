@@ -15,30 +15,19 @@ r = redis.Redis(
     password=PASSWORD, ssl=True)
 
 
-def send_err(err_msg):
-    base_url = 'https://sctapi.ftqq.com/SCT33292TX3fnGuyxnE4XZEG4CYQXE63P.send?'
-    title = '获取微信API失败，请检查接口是否已更换'
-    content = str(err_msg)
-    url_full = base_url + 'title=' + title + '&desp=' + content
-    url_encode = quote(url_full, safe='/:?=&%20')
-    requests.get(url_encode)
-
-
 def get_new_url(wxv, num=0):
-    cookie = r.get('cookie')
     url = f'https://mp.weixin.qq.com/mp/videoplayer?action=get_mp_video_play_url&preview=0&__biz=&mid=&idx=&vid={wxv}&uin=&key=&pass_ticket=&wxtoken=&appmsg_token=&x5=0&f=json'
     headers = {
-        'Cookie': cookie,
         'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_6) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/71.0.3578.98 Safari/537.36',
         'X-Requested-With': 'XMLHttpRequest'}
     wxv_content = requests.get(url, headers=headers).json()
     try:
         url_content = wxv_content["url_info"][num]['url']
     except KeyError and IndexError as e:
-        send_err(e)
+        print(e)
         return 0
     url_content = url_content.replace('http://', 'https://')
-    r.set(wxv, url_content, ex=18000)
+    r.set(wxv, url_content, ex=9000)
     return url_content
 
 
