@@ -23,7 +23,7 @@
 </center>
 <!-- 现代写法，推荐(不支持 IE) -->
 <script>
-  fetch('https://v1.hitokoto.cn')
+  fetch('https://v1.hitokoto.cn?max_length=20')
     .then(response => response.json())
     .then(data => {
       const hitokoto = document.getElementById('hitokoto_text')
