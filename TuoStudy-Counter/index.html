@@ -17,12 +17,26 @@
     width: 100%;
     text-align: center;
     font-size: .5rem;
-    line-height: 0rem;
+    line-height: 0.8rem;
     font-weight: 500;
     --tw-text-opacity: 1;
     color: rgb(161 161 170/var(--tw-text-opacity));
     }
 </style>
+
+<!-- 请注意，以下的示例包含超链接，您可能需要手动配置样式使其不变色。如果您嫌麻烦，可以移除。 -->
+<p id="hitokoto"><p href="#" id="hitokoto_text">:D 获取中...</p></p>
+<!-- 以下写法，选取一种即可 --></center><!-- 现代写法，推荐(不支持 IE) --><script>
+  fetch('https://v1.hitokoto.cn')
+    .then(response => response.json())
+    .then(data => {
+      const hitokoto = document.getElementById('hitokoto_text')
+      hitokoto.href = 'https://hitokoto.cn/?uuid=' + data.uuid
+      hitokoto.innerText = data.hitokoto
+    })
+    .catch(console.error)
+</script>
+
 <p>总访问量 <span id="busuanzi_value_site_pv"></span> 次&nbsp&nbsp总访客数 <span id="busuanzi_value_site_uv"></span> 人</p>
 </body>
 </html>
