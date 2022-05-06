@@ -1,4 +1,5 @@
-## 自用API地址
+![icodeq-api](https://socialify.git.ci/zkeq/icodeq-api/image?description=1&font=Rokkitt&forks=1&language=1&name=1&owner=1&pattern=Circuit%20Board&stargazers=1&theme=Light)
+
 [![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fzkeq%2Ficodeq-api.svg?type=small)](https://app.fossa.com/projects/git%2Bgithub.com%2Fzkeq%2Ficodeq-api?ref=badge_small)
 
 > 部分 `API` 说明参考博文: https://icodeq.com/2022/03e4ec0968c8/
