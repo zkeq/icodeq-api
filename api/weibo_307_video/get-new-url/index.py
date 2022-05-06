@@ -8,6 +8,7 @@ import os
 
 env_dist = os.environ
 PASSWORD = env_dist.get('PASSWORD')
+AK = env_dist.get("AK")
 
 r = redis.Redis(
     host='apn1-destined-giraffe-32369.upstash.io',
@@ -16,7 +17,7 @@ r = redis.Redis(
 
 
 def send_err(err_msg):
-    base_url = 'https://sctapi.ftqq.com/SCT33292TX3fnGuyxnE4XZEG4CYQXE63P.send?'
+    base_url = f'https://sctapi.ftqq.com/{AK}.send?'
     title = '获取微博API失败，请检查Cookie是否正确'
     content = str(err_msg)
     url_full = base_url + 'title=' + title + '&desp=' + content
