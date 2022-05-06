@@ -10,6 +10,7 @@ env_dist = os.environ
 PASSWORD = env_dist.get('PASSWORD')
 AK = env_dist.get("AK")
 
+
 r = redis.Redis(
     host='apn1-destined-giraffe-32369.upstash.io',
     port=32369,
