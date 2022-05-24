@@ -24,6 +24,34 @@
     }
 </style>
 
-<p>总访问量 <span id="busuanzi_value_site_pv"></span> 次&nbsp&nbsp总访客数 <span id="busuanzi_value_site_uv"></span> 人</p>
+<p>总访问量 <span id="busuanzi_value_site_pv"></span> 次&nbsp&nbsp总访客数 <span id="busuanzi_value_site_uv"></span> 人&nbsp&nbsp当前在线人数 <span id="live_people"></span> 人</p>
+
+<script>
+    function live(){
+    let url = "https://site.icodeq.com/api/stats/tuostudy.com/current-visitors";
+    let live_send = function () {
+        let xhr = new XMLHttpRequest();
+        xhr.open("GET", url, true);
+        xhr.onreadystatechange = function () {
+            if (xhr.readyState === 4) {
+                if (xhr.status === 200) {
+                    let res = JSON.parse(xhr.responseText);
+                    console.log("获取到当前在线人数：", res);
+                    document.getElementById("live_people").innerHTML = res;
+                }
+            }
+        }
+    xhr.send();
+    };
+    live_send();
+    // setInterval("live_send()","1000");
+
+}
+live();
+setInterval("live()","1000");
+
+</script>
+
+
 </body>
 </html>
