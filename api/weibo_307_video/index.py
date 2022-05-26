@@ -45,7 +45,7 @@ class handler(BaseHTTPRequestHandler):
         self.send_header('Access-Control-Allow-Origin', '*')
         self.send_header('location', url)
         self.send_header('Refresh', '0;url={}'.format(url))
-        self.send_header('Cache-Control', 'max-age=0, s-maxage=60, stale-while-revalidate=2700')
+        self.send_header('Cache-Control', 'max-age=0, s-maxage=60, stale-while-revalidate=3200')
         self.send_header('Content-type', 'text/plain')
         self.end_headers()
         self.wfile.write('Redirecting to {} (308)'.format(url).encode('utf-8'))
