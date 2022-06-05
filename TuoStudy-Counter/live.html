@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/jquery/3.6.0/jquery.min.js"
+        type="application/javascript"></script>
+    <title>count</title>
+</head>
+<body>
+<style>
+    p {
+    -webkit-text-size-adjust: 100%;
+    font-family: Inter,Noto Sans SC,ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Arial,Noto Sans,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol,Noto Color Emoji;
+    box-sizing: border-box;
+    border: 0 solid #e4e4e7;
+    width: 100%;
+    text-align: center;
+    font-size: 0.75rem;
+    line-height: 0.3rem;
+    font-weight: 500;
+    --tw-text-opacity: 1;
+    color: rgb(161 161 170/var(--tw-text-opacity));
+    }
+</style>
+
+<p>当前在线 <span style="color: red;" id="online_user"></span> 人&nbsp&nbsp全站在线学习总时间 <span style="color: red;" id="online_time"></span></p>
+
+
+<script>
+function loop() {
+    $.ajax({
+        url: 'https://tuo.live.icodeq.com/counter',
+        type: 'GET',
+        success: function (res) {
+            if (res.success === true) {
+                $('#online_user').text(res.data.online_user)
+                $('#online_time').text(formatTime(res.data.online_time))
+            } else {
+                alert(res.message)
+            }
+        }
+    });
+}
+
+loop();
+setInterval(loop, 1000);
+
+function formatTime(time) {
+    var h = parseInt(time / 3600)
+    var m = parseInt((time - h * 3600) / 60)
+    var s = time - h * 3600 - m * 60
+    return h + 'h ' + m + 'm ' + s + "s"
+}
+</script>
+
+
+</body>
+</html>
