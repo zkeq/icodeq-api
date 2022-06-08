@@ -4,8 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://lf6-cdn-tos.bytecdntp.com/cdn/expire-1-M/jquery/3.6.0/jquery.min.js"
-        type="application/javascript"></script>
+    <script async interval="0" src="https://tuo.live.icodeq.com/counter.js"></script>
     <title>count</title>
 </head>
 <body>
@@ -25,36 +24,8 @@
     }
 </style>
 
-<p>当前在线 <span style="color: red;" id="online_user"></span> 人&nbsp&nbsp全站在线学习总时间 <span style="color: red;" id="online_time"></span></p>
-
-
-<script>
-function loop() {
-    $.ajax({
-        url: 'https://tuo.live.icodeq.com/counter',
-        type: 'GET',
-        success: function (res) {
-            if (res.success === true) {
-                $('#online_user').text(res.data.online_user)
-                $('#online_time').text(formatTime(res.data.online_time))
-            } else {
-                alert(res.message)
-            }
-        }
-    });
-}
-
-loop();
-setInterval(loop, 1000);
-
-function formatTime(time) {
-    var h = parseInt(time / 3600)
-    var m = parseInt((time - h * 3600) / 60)
-    var s = time - h * 3600 - m * 60
-    return h + 'h ' + m + 'm ' + s + "s"
-}
-</script>
-
+<p>当前在线 <span style="color: red;" id="online_user"></span> 人&nbsp&nbsp全站在线学习总时间 <span style="color: red;" id="online_total"></span></p>
+<p>当前设备在线: <span style="color: red;" id="online_me"></span></p>
 
 </body>
 </html>
