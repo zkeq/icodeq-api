@@ -13,7 +13,7 @@ def get_data(name):
     gitpage = requests.get("https://github.com/" + name)
     data = gitpage.text
     data_date_reg = re.compile(r'data-date="(.*?)" data-level')
-    data_count_reg = re.compile(r'data-count="(.*?)" data-date')
+    data_count_reg = re.compile(r'rx="2" ry="2">(.*?) contributions')
     data_date = data_date_reg.findall(data)
     data_count = data_count_reg.findall(data)
     data_count = list(map(int, data_count))
