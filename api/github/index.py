@@ -16,7 +16,7 @@ def get_data(name):
     data_count_reg = re.compile(r'rx="2" ry="2">(.*?) contributions')
     data_date = data_date_reg.findall(data)
     data_count = data_count_reg.findall(data)
-    data_count = list(map(int, data_count))
+    data_count = list(map(int, [0 if i == "No" else i for i in data_count]))
     contributions = sum(data_count)
     data_list = []
     for index, item in enumerate(data_date):
