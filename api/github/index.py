@@ -46,4 +46,27 @@ def error_403(path, user,msg):
     return code, data, data_type
 
 
-print(get_data("zkeq"))
+class Handler(BaseHTTPRequestHandler):
+    def do_GET(self):
+        path = self.path
+        try:
+            user = path.split('?')[1]
+        except IndexError:
+            user = None
+        if user:
+            _data = get_data(user)
+            data = json.dumps(_data).encode('utf-8')
+            code = 200
+            print("成功获取到Github日历：", user)
+            data_type = 'application/json'
+        else:
+            code, data, data_type = error_403(path, user, "获取Github日历失败：")
+        if code == 200:
+            if not _data.get('contributions'):
+                code, data, data_type = error_403(path, user, "Github日历内容为空：")
+        self.send_response(code)
+        self.send_header('Access-Control-Allow-Origin', '*')
+        self.send_header('Content-type', data_type)
+        self.end_headers()
+        self.wfile.write(data)
+        return
